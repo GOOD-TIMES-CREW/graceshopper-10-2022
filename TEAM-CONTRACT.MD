@@ -5,8 +5,11 @@
 ## ROLES
 
     - Taskmaster
+        - Maintains check ins and to-do list
     - Gitmaster
+        - In charge of looking at commits and merge/pull requests, executing merge at EOD
     - Testmaster
+        - Making sure test specs are written, check that specs from merge requests are passing
 
 ## DAILY PROCESS
 
