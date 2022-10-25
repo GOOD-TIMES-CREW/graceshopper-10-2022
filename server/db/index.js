@@ -3,13 +3,21 @@
 const db = require("./db");
 const User = require("./models/User");
 const Product = require("./models/Product");
+const Order = require("./models/Order");
+const OrderProducts = require("./models/OrderProducts");
+// const Address = require('./models/Address')
+const Wishlist = require("./models/Wishlist");
 
-//Many-to-Many (Products and User)
-//A user can have many product, Product belongs to many users
-User.belongsToMany(Product, { through: "UserProducts" });
-Product.belongsToMany(User, { through: "UserProducts" });
+User.hasMany(Product);
+Product.belongsToMany(User);
 
-//test
+Order.hasMany(Product);
+Product.belongsToMany(Order);
+
+Wishlist.belongsTo(User);
+Product.belongsToMany(Wishlist);
+Order.belongsTo(User);
+// User.hasOne(Address)
 
 //have to add associations with Address, Cart, Wishlist below
 
@@ -18,5 +26,9 @@ module.exports = {
   models: {
     User,
     Product,
+    Order,
+    OrderProducts,
+    Address,
+    Wishlist,
   },
 };
