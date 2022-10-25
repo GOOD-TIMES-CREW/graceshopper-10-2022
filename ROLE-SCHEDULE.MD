@@ -1,7 +1,7 @@
 ### 10/24/2022
 
 - Taskmaster: Sarah
-- itmaster: JD
+- Gitmaster: JD
 - Testmaster: Corinna
 
 ### 10/25/2022
