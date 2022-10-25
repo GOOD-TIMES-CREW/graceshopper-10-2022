@@ -5,9 +5,6 @@ const Product = db.define("product", {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
   },
   description: {
     type: Sequelize.TEXT,
@@ -17,25 +14,16 @@ const Product = db.define("product", {
     defaultValue: "",
   },
   price: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.DECIMAL,
     allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
   },
   genre: {
     type: Sequelize.STRING,
     allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
   },
   inventory: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
   },
 });
 
