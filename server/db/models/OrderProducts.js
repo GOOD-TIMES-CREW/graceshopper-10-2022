@@ -1,9 +1,16 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 
-const Cart = db.define("cart", {
+const OrderProducts = db.define("order", {
+  orderId: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
   productId: {
-    type: Sequelize.STRING,
+    type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
       notEmpty: true,
@@ -15,4 +22,4 @@ const Cart = db.define("cart", {
   },
 });
 
-module.exports = Cart;
+module.exports = OrderProducts;
