@@ -1,6 +1,6 @@
 // DUMMY PRODUCT DATA
 
-const gameboyColor = [
+export const gameboyColor = [
   {
     name: "Dragon Ball Z: Legendary Super Warriors",
     imageUrl: "dummy data/img/gameboy color/dragonballsuperwarriors.jpeg",

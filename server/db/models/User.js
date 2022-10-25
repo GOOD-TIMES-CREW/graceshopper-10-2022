@@ -4,18 +4,15 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const SALT_ROUNDS = 5;
-//test
 const User = db.define("user", {
   firstName: {
     type: Sequelize.STRING,
-    allowNull: false,
     validate: {
       notEmpty: true,
     },
   },
   lastName: {
     type: Sequelize.STRING,
-    allowNull: false,
     validate: {
       notEmpty: true,
     },
@@ -31,7 +28,7 @@ const User = db.define("user", {
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
-    allowNull: false,
+    defaultValue: false,
   },
 });
 

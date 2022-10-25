@@ -1,11 +1,11 @@
-const { faker } = require("@faker-js/faker");
-const { db } = require("../server/db/db");
+//const { faker } = require("@faker-js/faker");
+const {
+  db,
+  models: { User, Product },
+} = require("../server/db");
 const { green, red } = require("chalk");
 
-const Users = require("./server/db/models/Students");
-const Products = require("./server/db/models/Campuses");
-
-const gameboyColor = [
+const products = [
   {
     name: "Dragon Ball Z: Legendary Super Warriors",
     imageUrl: "dummy data/img/gameboy color/dragonballsuperwarriors.jpeg",
@@ -41,134 +41,104 @@ const users = [
   {
     firstName: "Harry",
     lastName: "Potter",
-    email: "hpotter@hogwarts.co.uk",
-    imageUrl: "https://i.ibb.co/tPqV51G/harry.webp",
-    gpa: 3.5,
-    campusId: 1,
+    email: "harry.potter@wizardingworld.co.uk",
+    password: "fuckvoldemort",
+    isAdmin: false,
   },
   {
     firstName: "Ronald",
     lastName: "Weasley",
-    email: "rweasley@hogwarts.co.uk",
-    imageUrl: "https://i.ibb.co/QmnT5fv/ron.jpg",
-    gpa: 2.7,
-    campusId: 1,
+    email: "ron.weasley@wizardingworld.co.uk",
+    password: "fuckvoldemort",
+    isAdmin: false,
   },
   {
     firstName: "Hermione",
     lastName: "Granger",
-    email: "hgranger@hogwarts.co.uk",
-    imageUrl: "https://i.ibb.co/QdVQvYF/hermione-jpg.webp",
-    gpa: 4.3,
-    campusId: 1,
+    email: "hermione.granger@wizardingworld.co.uk",
+    password: "fuckvoldemort",
+    isAdmin: true,
   },
   {
-    firstName: "Dean",
-    lastName: "Thomas",
-    email: "dthomas@hogwarts.co.uk",
-    imageUrl: "https://i.ibb.co/Z8wnwds/dean.jpg",
-    gpa: 3.8,
-    campusId: 1,
+    firstName: "Draco",
+    lastName: "Malfoy",
+    email: "draco.malfoy@wizardingworld.co.uk",
+    password: "fuckharry",
+    isAdmin: false,
   },
   {
-    firstName: "Padma",
-    lastName: "Patil",
-    email: "papatil@hogwarts.co.uk",
-    imageUrl: "https://i.ibb.co/5BvhztF/padma.jpg",
-    gpa: 3.0,
-    campusId: 1,
+    firstName: "Severus",
+    lastName: "Snape",
+    email: "severus.snape@wizardingworld.co.uk",
+    password: "iluvlily",
+    isAdmin: true,
   },
   {
-    firstName: "Ginny",
-    lastName: "Weasley",
-    email: "gweasley@hogwarts.co.uk",
-    imageUrl: "https://i.ibb.co/yf6nwqj/ginny.jpg",
-    gpa: 3.9,
-    campusId: 1,
-  },
-  {
-    firstName: "Luna",
-    lastName: "Lovegood",
-    email: "llovegood@hogwarts.co.uk",
-    imageUrl: "https://i.ibb.co/mTsjh1W/Luna.webp",
-    gpa: 3.9,
-    campusId: 1,
-  },
-  {
-    firstName: "Viktor",
-    lastName: "Krum",
-    email: "vkrum@durmstrang.eu",
-    imageUrl: "https://i.ibb.co/c2WNq2D/krum.webp",
-    gpa: 2.4,
-    campusId: 3,
-  },
-  {
-    firstName: "Fluer",
-    lastName: "Delacour",
-    email: "fleur@beauxbatons.fr",
-    imageUrl: "https://i.ibb.co/c2WNq2D/krum.webp",
-    gpa: 3.4,
-    campusId: 2,
+    firstName: "Minerva",
+    lastName: "McGonagall",
+    email: "minerva.mcgonagall@wizardingworld.co.uk",
+    password: "ilovealbus",
+    isAdmin: true,
   },
 ];
 
-const studentGenerator = () => {
-  const randomIdx = () => Math.floor(Math.random() * names.length);
-  const randomFirstName = names[randomIdx()];
-  const randomLastName =
-    names[randomIdx()] === randomFirstName
-      ? names[randomIdx() + 1]
-      : names[randomIdx()];
-  const randomGpa = Math.round((Math.random() * (4 - 1) + 1) * 10) / 10;
-  return {
-    firstName: randomFirstName,
-    lastName: randomLastName,
-    email: `${randomFirstName.charAt(0)}${randomLastName}@wizardingworld.co.uk`,
-    imageUrl: faker.image.avatar(),
-    gpa: randomGpa,
-    campusId: Math.floor(Math.random() * campuses.length + 1),
-  };
-};
+// const userGenerator = () => {
+//   const randomIdx = () => Math.floor(Math.random() * names.length);
+//   const randomFirstName = names[randomIdx()];
+//   const randomLastName =
+//     names[randomIdx()] === randomFirstName
+//       ? names[randomIdx() + 1]
+//       : names[randomIdx()];
+//   const randomGpa = Math.round((Math.random() * (4 - 1) + 1) * 10) / 10;
+//   return {
+//     firstName: randomFirstName,
+//     lastName: randomLastName,
+//     email: `${randomFirstName.charAt(0)}${randomLastName}@wizardingworld.co.uk`,
+//     imageUrl: faker.image.avatar(),
+//     gpa: randomGpa,
+//     campusId: Math.floor(Math.random() * campuses.length + 1),
+//   };
+// };
 
-const campusGenerator = () => {
-  const name = unique[Math.floor(Math.random() * unique.length)];
-  const institution = school[Math.floor(Math.random() * school.length)];
-  const of = grammar[Math.floor(Math.random() * grammar.length)];
-  const magica = magic[Math.floor(Math.random() * magic.length)];
-  const descrip = [];
-  Array.from({ length: 10 }).forEach(() => {
-    descrip.push(faker.hacker.phrase());
-  });
+// const campusGenerator = () => {
+//   const name = unique[Math.floor(Math.random() * unique.length)];
+//   const institution = school[Math.floor(Math.random() * school.length)];
+//   const of = grammar[Math.floor(Math.random() * grammar.length)];
+//   const magica = magic[Math.floor(Math.random() * magic.length)];
+//   const descrip = [];
+//   Array.from({ length: 10 }).forEach(() => {
+//     descrip.push(faker.hacker.phrase());
+//   });
 
-  return {
-    name: `${name} ${institution} ${of} ${magica}`,
-    imageUrl: faker.image.avatar(),
-    address: faker.address.city(),
-    description: descrip.join(" "),
-  };
-};
+//   return {
+//     name: `${name} ${institution} ${of} ${magica}`,
+//     imageUrl: faker.image.avatar(),
+//     address: faker.address.city(),
+//     description: descrip.join(" "),
+//   };
+// };
 
-Array.from({ length: 100 }).forEach(() => {
-  campuses.push(campusGenerator());
-});
+// Array.from({ length: 100 }).forEach(() => {
+//   campuses.push(campusGenerator());
+// });
 
-Array.from({ length: 200 }).forEach(() => {
-  students.push(studentGenerator());
-});
+// Array.from({ length: 200 }).forEach(() => {
+//   students.push(studentGenerator());
+// });
 
 const seed = async () => {
   try {
     await db.sync({ force: true });
 
     await Promise.all(
-      campuses.map((campus) => {
-        return Campuses.create(campus);
+      products.map((product) => {
+        return Product.create(product);
       })
     );
 
     await Promise.all(
-      students.map((student) => {
-        return Students.create(student);
+      users.map((user) => {
+        return User.create(user);
       })
     );
 
