@@ -12,9 +12,15 @@
 
 ### _models_
 
-- [ ] create a model for products - [ ] name - not empty or null - [ ] image - not empty or null, default value - [ ] price - not empty or null; - [ ] genre - not empty or null; - [ ] inventory - not empty or null; must be a valid email
-- [ ] create a model for users - [ ] username, password, name, address, cart, previous orders, wishlist
-- [ ] create necessary model associations
+- [X] create a model for products
+  - [X] name - not empty or null
+  - [X] image - not empty or null, default value
+  - [X] price - not empty or null;
+  - [X] genre - not empty or null;
+  - [X] inventory - not empty or null; must be a valid email
+- [X] create a model for users
+  - username, password, name (firstName, lastName), address, cart, previous orders, wishlist
+  - [X] create necessary model associations
 
 ### _routes_
 
