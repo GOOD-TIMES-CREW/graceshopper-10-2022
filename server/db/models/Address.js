@@ -40,3 +40,4 @@ const Address = db.define("address", {
 });
 
 module.exports = Address;
+//test

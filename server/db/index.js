@@ -9,6 +9,10 @@ const Product = require("./models/Product");
 User.belongsToMany(Product, { through: "UserProducts" });
 Product.belongsToMany(User, { through: "UserProducts" });
 
+//test
+
+//have to add associations with Address, Cart, Wishlist below
+
 module.exports = {
   db,
   models: {

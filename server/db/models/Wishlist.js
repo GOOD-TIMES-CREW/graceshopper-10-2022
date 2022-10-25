@@ -6,3 +6,4 @@ const Wishlist = db.define("wishlist", {
 });
 
 module.exports = Wishlist;
+//test
