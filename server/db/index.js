@@ -3,20 +3,20 @@
 const db = require("./db");
 const User = require("./models/User");
 const Product = require("./models/Product");
-const Order = require("./models/Order");
-const OrderProducts = require("./models/OrderProducts");
+//const Order = require("./models/Order");
+//const OrderProducts = require("./models/OrderProducts");
 // const Address = require('./models/Address')
-const Wishlist = require("./models/Wishlist");
+//const Wishlist = require("./models/Wishlist");
 
-User.hasMany(Product);
-Product.belongsToMany(User);
+// User.hasMany(Product);
+// Product.belongsToMany(User, { through: User });
 
-Order.hasMany(Product);
-Product.belongsToMany(Order);
+// Order.hasMany(Product);
+// Product.belongsToMany(Order);
 
-Wishlist.belongsTo(User);
-Product.belongsToMany(Wishlist);
-Order.belongsTo(User);
+// Wishlist.belongsTo(User);
+// Product.belongsToMany(Wishlist);
+// Order.belongsTo(User);
 // User.hasOne(Address)
 
 //have to add associations with Address, Cart, Wishlist below
@@ -26,9 +26,9 @@ module.exports = {
   models: {
     User,
     Product,
-    Order,
-    OrderProducts,
-    Address,
-    Wishlist,
+    // Order,
+    // OrderProducts,
+    // Address,
+    // Wishlist,
   },
 };
