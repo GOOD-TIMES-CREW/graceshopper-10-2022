@@ -6,36 +6,36 @@ const Product = db.define("product", {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-        notEmpty: true,
-      },
+      notEmpty: true,
+    },
   },
   description: {
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT,
   },
   image: {
     type: Sequelize.STRING,
-    defaultValue: ''
+    defaultValue: "",
   },
   price: {
-    type: Sequelize.DECIMAL(10, 2),
+    type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
-        notEmpty: true,
-      },
+      notEmpty: true,
+    },
   },
   genre: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-        notEmpty: true,
-      },
+      notEmpty: true,
+    },
   },
   inventory: {
     type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
-        notEmpty: true,
-      },
+      notEmpty: true,
+    },
   },
 });
 

@@ -20,7 +20,7 @@ const User = db.define("user", {
       notEmpty: true,
     },
   },
-  username: {
+  email: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
@@ -29,7 +29,7 @@ const User = db.define("user", {
   password: {
     type: Sequelize.STRING,
   },
-  admin: {
+  isAdmin: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
   },
