@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <h1>FS-App-Template</h1>
+      <h3>Good Old Days</h3>
       <nav>
         {isLoggedIn ? (
           <div>

@@ -27,6 +27,7 @@ const User = db.define("user", {
   },
 });
 
+//fixed
 module.exports = User;
 
 /**
