@@ -5,6 +5,7 @@ import AuthForm from "../components/auth/AuthForm";
 import Home from "../components/home/Home";
 import AllProducts from "../components/products/AllProducts";
 import { me } from "./store";
+import OrderHistory from "../components/user/OrderHistory";
 
 /**
  * COMPONENT
@@ -40,6 +41,7 @@ const AppRoutes = () => {
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
           <Route path="/allproducts" element={<AllProducts />} />
+          <Route path="/orders" element={<OrderHistory />} />
         </Routes>
       )}
     </div>
