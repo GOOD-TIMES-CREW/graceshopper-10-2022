@@ -21,12 +21,10 @@ function AllProducts() {
               src={product.imageUrl}
               onClick={() => Navigate(`/products/${product.id}`)}
             />
-            {console.log(product.id)}
-            <p>Name: {product.name}</p>
-            <p>{product.description}</p>
-            <p>Price: {product.price}</p>
-            <p>{product.genre}</p>
-            <p>In Stock: {product.inventory}</p>
+            <div className="font-center">
+              <p>{product.name}</p>
+              <p>${product.price}</p>
+            </div>
           </div>
         );
       })}
