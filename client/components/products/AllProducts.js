@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts } from "../../features/productsSlice";
+import { fetchAllProducts } from "../../features/productsSlice";
+import { useNavigate } from "react-router-dom";
 
 function AllProducts() {
   const dispatch = useDispatch();
+  const Navigate = useNavigate();
   const products = useSelector((state) => state.products.products);
 
-  console.log(products);
-
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchAllProducts());
   }, [dispatch]);
 
   return (
@@ -17,12 +17,14 @@ function AllProducts() {
       {products?.map((product) => {
         return (
           <div key={product.id} className="product-label">
-            <img src={product.imageUrl} />
-            <p>Name: {product.name}</p>
-            <p>{product.description}</p>
-            <p>Price: {product.price}</p>
-            <p>{product.genre}</p>
-            <p>In Stock: {product.inventory}</p>
+            <img
+              src={product.imageUrl}
+              onClick={() => Navigate(`/products/${product.id}`)}
+            />
+            <div className="font-center">
+              <p>{product.name}</p>
+              <p>${product.price}</p>
+            </div>
           </div>
         );
       })}
