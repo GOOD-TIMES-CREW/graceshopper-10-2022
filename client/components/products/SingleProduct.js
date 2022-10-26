@@ -15,14 +15,14 @@ function SingleProduct() {
 
   return (
     <ul>
-      <p>SINGLE PRODUCT AREA</p>;
-      <div key={product.id} className="product-label">
+      <div key={product.id} className="product-label, font-center">
         <img src={product.imageUrl} />
-        <p>Name: {product.name}</p>
+        <p>{product.name}</p>
         <p>{product.description}</p>
-        <p>Price: {product.price}</p>
-        <p>{product.genre}</p>
-        <p>In Stock: {product.inventory}</p>
+        <p>${product.price}</p>
+        <p>Genre: {product.genre}</p>
+        <p>Current Stock: {product.inventory}</p>
+        <button>Add to Cart</button>
       </div>
     </ul>
   );

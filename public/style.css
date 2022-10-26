@@ -27,6 +27,9 @@ form div {
   justify-content: center;
   padding: 20px;
 }
+.font-center {
+  text-align: center;
+}
 
 a:link {
   color: red;
