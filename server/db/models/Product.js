@@ -9,9 +9,9 @@ const Product = db.define("product", {
   description: {
     type: Sequelize.TEXT,
   },
-  image: {
+  imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: "",
+    defaultValue: "https://i.ibb.co/QdVQvYF/hermione-jpg.webp",
   },
   price: {
     type: Sequelize.DECIMAL,
