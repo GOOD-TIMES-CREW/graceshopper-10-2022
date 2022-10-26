@@ -5,29 +5,25 @@ import { fetchSingleProduct } from "../../features/productsSlice";
 
 function SingleProduct() {
   const dispatch = useDispatch();
-  const { id } = useParams;
+  const { id } = useParams();
 
   const product = useSelector((state) => state.products.product);
-  console.log("product", product);
 
   useEffect(() => {
     dispatch(fetchSingleProduct(id));
   }, [dispatch]);
 
-  // key={product.id}
   return (
     <ul>
       <p>SINGLE PRODUCT AREA</p>;
-      {/* <div key={product.id} className="product-label">
-            <img
-              src={product.imageUrl}
-            />
-            <p>Name: {product.name}</p>
-            <p>{product.description}</p>
-            <p>Price: {product.price}</p>
-            <p>{product.genre}</p>
-            <p>In Stock: {product.inventory}</p>
-          </div> */}
+      <div key={product.id} className="product-label">
+        <img src={product.imageUrl} />
+        <p>Name: {product.name}</p>
+        <p>{product.description}</p>
+        <p>Price: {product.price}</p>
+        <p>{product.genre}</p>
+        <p>In Stock: {product.inventory}</p>
+      </div>
     </ul>
   );
 }

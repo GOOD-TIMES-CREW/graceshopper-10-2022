@@ -55,7 +55,7 @@ export const productsSlice = createSlice({
       state.products = action.payload;
     }),
       builder.addCase(fetchSingleProduct.fulfilled, (state, action) => {
-        console.log("payload", action.payload);
+        state.product = action.payload;
       });
     // builder.addCase(addProduct.fulfilled, (state, action) => {
     //   state.push(action.payload);
