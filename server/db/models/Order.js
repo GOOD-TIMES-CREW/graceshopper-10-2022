@@ -1,19 +1,25 @@
-// const Sequelize = require("sequelize");
-// const db = require("../db");
+const Sequelize = require("sequelize");
+const db = require("../db");
 
-// const Order = db.define("order", {
-//   userId: {
-//     type: Sequelize.STRING,
-//     allowNull: false,
-//     validate: {
-//       notEmpty: true,
-//     },
-//   },
-//   status: {
-//     type: Sequelize.ENUM("fulfilled, unfulfilled"),
-//     defaultValue: "unfulfilled",
-//     allowNull: false,
-//   },
-// });
+const Order = db.define("order", {
+  // the through table automatically generates the foreign keys for product and user, so we do not need to define here
+  status: {
+    type: Sequelize.ENUM("fulfilled", "unfulfilled"),
+    defaultValue: "unfulfilled",
+  },
+  shipped: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  confirmationNumber: {
+    type: Sequelize.STRING,
+  },
+  shipping_address: {
+    type: Sequelize.TEXT,
+  },
+  dateOrdered: {
+    type: Sequelize.DATE,
+  },
+});
 
-// module.exports = Order;
+module.exports = Order;
