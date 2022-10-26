@@ -16,4 +16,6 @@ const Order_Product = db.define("product_order", {
   },
 });
 
+//ok
+
 module.exports = Order_Product;

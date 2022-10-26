@@ -22,4 +22,6 @@ const Order = db.define("order", {
   },
 });
 
+//fixed
+
 module.exports = Order;

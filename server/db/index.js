@@ -14,7 +14,6 @@ Order.belongsTo(User);
 
 // Wishlist.belongsTo(User);
 // Product.belongsToMany(Wishlist);
-// Order.belongsTo(User);
 
 //have to add associations with Address, Cart, Wishlist below
 
