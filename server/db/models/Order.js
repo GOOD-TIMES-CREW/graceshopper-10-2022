@@ -2,6 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 
 const Order = db.define("order", {
+  // the through table automatically generates the foreign keys for product and user, so we do not need to define here
   status: {
     type: Sequelize.ENUM("fulfilled", "unfulfilled"),
     defaultValue: "unfulfilled",
@@ -22,7 +23,3 @@ const Order = db.define("order", {
 });
 
 module.exports = Order;
-
-// the through table automatically generates the foreign keys for product and user, so we do not need to define here
-
-//fixed
