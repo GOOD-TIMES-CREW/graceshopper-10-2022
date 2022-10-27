@@ -42,9 +42,11 @@ const AppRoutes = () => {
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
 
-          <Route path="/orders" element={<OrderHistory />} />
+          <Route path="/order_history" element={<OrderHistory />} />
           <Route path="/products" element={<AllProducts />} />
           <Route path="/products/:id" element={<SingleProduct />} />
+          {/* <Route path="/orders" element={<AllOrders />} />
+          <Route path="/orders/:id" element={<SingleOrder />} /> */}
         </Routes>
       )}
     </div>
