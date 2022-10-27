@@ -10,6 +10,8 @@ import OrderHistory from "../features/user/OrderHistory";
 import Success from "../features/cart/Success";
 import Canceled from "../features/cart/Canceled";
 import Store from "../features/cart/Store";
+import Register from "../features/registration/Register";
+import AccountPage from "../features/user/AccountPage";
 
 /**
  * COMPONENT
@@ -37,6 +39,7 @@ const AppRoutes = () => {
             element={<AuthForm name="login" displayName="Login" />}
           /> */}
           <Route path="/*" element={<Store />} />
+          <Route path="/register" element={<Register />} />
           <Route
             path="/login"
             element={<AuthForm name="login" displayName="Login" />}
@@ -46,6 +49,7 @@ const AppRoutes = () => {
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
 
+          <Route to="/users/:id" element={<AccountPage />} />
           <Route path="/order_history" element={<OrderHistory />} />
           <Route path="/products" element={<AllProducts />} />
           <Route path="/products/:id" element={<SingleProduct />} />
