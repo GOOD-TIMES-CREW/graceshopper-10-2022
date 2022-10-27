@@ -4,7 +4,7 @@ const {
   models: { Order, Order_Product },
 } = require("../db");
 
-// GET route for allOrders
+// GET api/orders/
 router.get("/", async (req, res, next) => {
   try {
     const allOrders = await Order.findAll();
@@ -14,7 +14,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// GET route for singleOrder
+// GET api/orders/:id
 router.get("/:id", async (req, res, next) => {
   try {
     const singleOrder = await Order.findByPk(req.params.id);
