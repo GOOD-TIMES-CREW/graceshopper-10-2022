@@ -16,6 +16,7 @@ router.get("/", async (req, res, next) => {
 // GET /api/products/:id
 router.get("/:id", async (req, res, next) => {
   try {
+    // o: make sure to catch the scenario where products are not found
     const product = await Product.findByPk(req.params.id);
     res.json(product);
   } catch (error) {
@@ -36,6 +37,7 @@ router.post("/", async (req, res, next) => {
 // DELETE /api/products/:id
 router.delete("/:id", async (req, res, next) => {
   try {
+    // o: make sure to catch the scenario where products are not found
     const product = await Product.findByPk(req.params.id);
     await product.destroy();
     res.send(product);

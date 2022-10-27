@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserOrderHistory } from "../../features/orderSlice";
 import { NavLink } from "react-router-dom";
 
+// o: please remove unused code
 // Dummy Data for now
 // const orderHistory = [
 //   {

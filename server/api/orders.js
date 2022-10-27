@@ -17,6 +17,7 @@ router.get("/", async (req, res, next) => {
 // GET api/orders/:id
 router.get("/:id", async (req, res, next) => {
   try {
+    // o: make sure to catch the scenario where orders are not found
     const singleOrder = await Order.findByPk(req.params.id);
     res.json(singleOrder);
   } catch (error) {
@@ -31,6 +32,7 @@ router.get("/user/:userId", async (req, res, next) => {
       where: {
         userId: req.params.userId,
       },
+      // o: please remove unused code
       // Error:EagerLoadingError [SequelizeEagerLoadingError]: order_product is not associated to order! Could not grab products
       // include: Order_Product,
     });

@@ -1,3 +1,6 @@
+// o: yeah so you should never keep this kind of data in your git repo because
+//  you've essentially given anyone with access to your repo the keys to the
+//  kingdom
 export const customers = [
   {
     firstName: "Harry",

@@ -17,10 +17,12 @@ const Product = db.define("product", {
     type: Sequelize.DECIMAL,
     allowNull: false,
   },
+  // o: let's chat about this during our Sprint Meeting
   genre: {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  // o: I am assuiming this is inventory quantity?
   inventory: {
     type: Sequelize.INTEGER,
     allowNull: false,

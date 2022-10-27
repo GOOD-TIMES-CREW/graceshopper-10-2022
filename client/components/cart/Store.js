@@ -19,6 +19,7 @@ function Store() {
         Welcome!
       </h1>
       <Row xs={1} md={3} className="g-4">
+        {/* o: nice 😉 */}
         {products?.map((product) => (
           <Col align="center" key={product.id}>
             <ProductCard product={product} />

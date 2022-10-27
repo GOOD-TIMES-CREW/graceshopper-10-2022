@@ -1,3 +1,4 @@
+// o: why is this here?
 export const ABOUT = [
   { name: "Accessibility", link: "#" },
   { name: "Customer Stories", link: "#" },

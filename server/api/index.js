@@ -3,6 +3,8 @@ const router = require("express").Router();
 router.use("/users", require("./users"));
 router.use("/products", require("./products"));
 router.use("/orders", require("./orders"));
+
+// o: remove unused code
 // router.use("/wishlist", require("./wishlist"));
 
 router.use((req, res, next) => {

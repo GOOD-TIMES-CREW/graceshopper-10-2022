@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllProducts } from "../../features/productsSlice";
 
+// o: explain
 export const CartContext = createContext({
   items: [],
   getProductQuantity: () => {},
@@ -33,6 +34,7 @@ export function CartProvider({ children }) {
 
     if (quantity === 0) {
       // product is not in the cart, we must establish item
+      // o: why is cartProducts being copied over?
       setCartProducts([
         ...cartProducts,
         {
@@ -45,6 +47,7 @@ export function CartProvider({ children }) {
       setCartProducts(
         cartProducts.map((product) =>
           product.id === id
+            // o: why is product being copied over? 
             ? { ...product, quantity: product.quantity + 1 }
             : product
         )
@@ -61,6 +64,7 @@ export function CartProvider({ children }) {
       setCartProducts(
         cartProducts.map((product) =>
           product.id === id
+            // o: why is product being copied over? 
             ? { ...product, quantity: product.quantity - 1 }
             : product
         )

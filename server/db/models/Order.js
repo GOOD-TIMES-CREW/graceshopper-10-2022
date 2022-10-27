@@ -7,6 +7,7 @@ const Order = db.define("order", {
     type: Sequelize.ENUM("fulfilled", "unfulfilled"),
     defaultValue: "unfulfilled",
   },
+  // o: is this being used???
   shipped: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,

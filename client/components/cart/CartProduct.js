@@ -20,6 +20,8 @@ function CartProduct(props) {
 
   return (
     <>
+      {/* o: instead of using hardcoded styles here, you should try creating
+            an object 👉 https://css-tricks.com/different-ways-to-write-css-in-react/#aa-write-inline-styles */}
       <img
         style={{ height: "100px", width: "100px" }}
         src={product[0].imageUrl}
