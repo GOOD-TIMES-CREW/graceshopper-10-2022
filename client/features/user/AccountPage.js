@@ -8,7 +8,7 @@ function AccountPage() {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const user = useSelector((state) => state.users.singleUser);
+  const user = useSelector((state) => state.users.user);
   console.log(user);
 
   useEffect(() => {

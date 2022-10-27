@@ -11,7 +11,7 @@ function Register() {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    dispatch(createUser(firstName, lastName, email, password));
+    dispatch(createUser({ firstName, lastName, email, password }));
     setFirstName("");
     setLastName("");
     setEmail("");

@@ -46,6 +46,8 @@ function NavbarComponent() {
                 <Nav.Link href="/login">Login</Nav.Link>
                 <Nav.Link href="/register">Sign Up</Nav.Link>
                 <Nav.Link href="/products">All Products</Nav.Link>
+                {/*Temporary, will switch this to only show up when admin is logged in later*/}
+                <Nav.Link href="/users">All Users</Nav.Link>
                 <Nav.Link href="/order_history">Order History</Nav.Link>
               </Nav>
               <Navbar.Toggle />
