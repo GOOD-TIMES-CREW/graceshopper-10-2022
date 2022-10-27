@@ -1,5 +1,8 @@
 body {
   font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 a {
@@ -20,6 +23,11 @@ form div {
   display: inline-block;
 }
 
+footer {
+  background-color: lightblue;
+  padding: 2rem;
+}
+
 .all-products {
   display: flex;
   flex-wrap: wrap;
@@ -29,6 +37,13 @@ form div {
 }
 .font-center {
   text-align: center;
+}
+
+.menus {
+  box-sizing: border-box;
+}
+main {
+  flex-grow: 1;
 }
 
 a:link {
