@@ -12,6 +12,7 @@ import Canceled from "../features/cart/Canceled";
 import Store from "../features/cart/Store";
 import Register from "../features/registration/Register";
 import AccountPage from "../features/user/AccountPage";
+import AllUsers from "../features/user/AllUsers";
 
 /**
  * COMPONENT
@@ -53,6 +54,7 @@ const AppRoutes = () => {
           <Route path="/order_history" element={<OrderHistory />} />
           <Route path="/products" element={<AllProducts />} />
           <Route path="/products/:id" element={<SingleProduct />} />
+          <Route path="/users" element={<AllUsers/>}/>
           {/* <Route path="/orders" element={<AllOrders />} />
           <Route path="/orders/:id" element={<SingleOrder />} /> */}
           <Route path="/success" element={<Success />} />
