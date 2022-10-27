@@ -15,8 +15,6 @@ Order.belongsTo(User);
 // Wishlist.belongsTo(User);
 // Product.belongsToMany(Wishlist);
 
-//have to add associations with Address, Cart, Wishlist below
-
 module.exports = {
   db,
   models: {
