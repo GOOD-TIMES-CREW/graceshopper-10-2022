@@ -24,7 +24,8 @@ form div {
 }
 
 footer {
-  background-color: lightblue;
+  background-color: white;
+  color: black;
   padding: 2rem;
 }
 
@@ -35,15 +36,34 @@ footer {
   justify-content: center;
   padding: 20px;
 }
+
 .font-center {
   text-align: center;
 }
 
-.menus {
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer-container {
+  margin: auto;
+}
+
+.footer-column {
+  width: 25%;
+  padding: 0 15px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
-main {
-  flex-grow: 1;
+
+#icons {
+  text-align: right;
+  zoom: 1.5;
 }
 
 a:link {
