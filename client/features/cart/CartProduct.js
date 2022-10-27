@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAllProducts } from "../../features/productsSlice";
+import { fetchAllProducts } from "../../features/products/productsSlice";
 import Button from "react-bootstrap/Button";
 import { CartContext } from "./CartContext";
 

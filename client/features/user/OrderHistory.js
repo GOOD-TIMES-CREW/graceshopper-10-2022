@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Potential path and function to fetch order history
-import { fetchUserOrderHistory } from "../../features/orderSlice";
+import { fetchUserOrderHistory } from "./orderSlice";
 import { NavLink } from "react-router-dom";
 
 // Dummy Data for now

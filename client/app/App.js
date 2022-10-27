@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Navbar from "../components/navbar/Navbar";
-import NavbarComponent from "../components/navbar/NavbarComponent";
+import Navbar from "../features/navbar/Navbar";
+import NavbarComponent from "../features/navbar/NavbarComponent";
 import AppRoutes from "./AppRoutes";
 import { Container } from "react-bootstrap";
-import CartProvider from "../components/cart/CartContext";
+import CartProvider from "../features/cart/CartContext";
 
 const App = () => {
   return (

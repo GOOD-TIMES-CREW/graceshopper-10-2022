@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAllProducts } from "../../features/productsSlice";
+import { fetchAllProducts } from "./productsSlice";
 import { useNavigate } from "react-router-dom";
-import ProductCard from "../products/ProductCard";
+import ProductCard from "./ProductCard";
 
-function Store() {
+function AllProducts() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
 
@@ -16,7 +16,7 @@ function Store() {
   return (
     <>
       <h1 align="center" className="p-3">
-        Welcome!
+        All Products
       </h1>
       <Row xs={1} md={3} className="g-4">
         {products?.map((product) => (
@@ -29,4 +29,23 @@ function Store() {
   );
 }
 
-export default Store;
+export default AllProducts;
+
+// return (
+//   <div className="all-products">
+//     {products?.map((product) => {
+//       return (
+//         <div key={product.id} className="product-label">
+//           <img
+//             src={product.imageUrl}
+//             onClick={() => Navigate(`/products/${product.id}`)}
+//           />
+//           <div className="font-center">
+//             <p>{product.name}</p>
+//             <p>${product.price}</p>
+//           </div>
+//         </div>
+//       );
+//     })}
+//   </div>
+// );

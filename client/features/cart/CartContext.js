@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAllProducts } from "../../features/productsSlice";
+import { fetchAllProducts } from "../../features/products/productsSlice";
 
 export const CartContext = createContext({
   items: [],

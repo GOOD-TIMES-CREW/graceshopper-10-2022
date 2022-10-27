@@ -1,12 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
-import authReducer from "../features/authSlice";
-import productsSliceReducer from "../features/productsSlice";
-import userSliceReducer from "../features/userSlice";
-import orderSliceReducer from "../features/orderSlice";
+import authReducer from "../features/auth/authSlice";
+import productsSliceReducer from "../features/products/productsSlice";
+import userSliceReducer from "../features/user/userSlice";
+import orderSliceReducer from "../features/user/orderSlice";
 
 // import wishlistSliceReducer from "../features/wishlistSlice";
-
 
 const store = configureStore({
   reducer: {
@@ -17,10 +16,9 @@ const store = configureStore({
     orders: orderSliceReducer,
 
     // wishlist: wishlistSliceReducer
-
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 
 export default store;
-export * from "../features/authSlice";
+export * from "../features/auth/authSlice";
