@@ -28,16 +28,4 @@ function SingleProduct() {
   );
 }
 
-// (all products display)
-//image, name, description, price
-
-//(single product display)
-//image
-//id
-//name
-//description
-//price
-//inventory
-//genre
-
 export default SingleProduct;
