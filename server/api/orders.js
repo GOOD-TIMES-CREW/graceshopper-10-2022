@@ -3,7 +3,7 @@ const {
   models: { Order, Order_Product },
 } = require("../db");
 
-router.get("/:userId", async (req, res, next) => {
+router.get("/user/:userId", async (req, res, next) => {
   try {
     const order = await Order.findAll({
       where: {
@@ -12,7 +12,6 @@ router.get("/:userId", async (req, res, next) => {
       // Error:EagerLoadingError [SequelizeEagerLoadingError]: order_product is not associated to order! Could not grab products
       // include: Order_Product,
     });
-    console.log("I'M IN A ROUTEE", order);
     res.json(order);
   } catch (err) {
     next(err);

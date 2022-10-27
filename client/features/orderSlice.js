@@ -18,8 +18,7 @@ export const fetchUserOrderHistory = createAsyncThunk(
   "fetchUserOrderHistory",
   async (id) => {
     try {
-      const { data } = await axios.get(`/api/orders/${id}`);
-      console.log("i'M IN THE THUNKKK", data);
+      const { data } = await axios.get(`/api/orders/user/${id}`);
       return data;
     } catch (error) {
       console.error(error.message);
