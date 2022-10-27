@@ -3,11 +3,10 @@ import { Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllProducts } from "../../features/productsSlice";
 import { useNavigate } from "react-router-dom";
-import ProductCard from "./ProductCard";
+import ProductCard from "../products/ProductCard";
 
 function Store() {
   const dispatch = useDispatch();
-  const Navigate = useNavigate();
   const products = useSelector((state) => state.products.products);
 
   useEffect(() => {

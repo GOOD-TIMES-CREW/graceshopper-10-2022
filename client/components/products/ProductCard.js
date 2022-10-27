@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Card, Button, Form, Row, Col } from "react-bootstrap";
-import { CartContext } from "./CartContext";
+import { CartContext } from "../cart/CartContext";
 import { useNavigate } from "react-router-dom";
 
 function ProductCard({ product }) {
