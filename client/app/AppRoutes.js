@@ -7,6 +7,9 @@ import AllProducts from "../components/products/AllProducts";
 import SingleProduct from "../components/products/SingleProduct";
 import { me } from "./store";
 import OrderHistory from "../components/user/OrderHistory";
+import Success from "../components/cart/Success";
+import Canceled from "../components/cart/Canceled";
+import Store from "../components/cart/Store";
 
 /**
  * COMPONENT
@@ -29,10 +32,11 @@ const AppRoutes = () => {
         </Routes>
       ) : (
         <Routes>
-          <Route
+          {/* <Route
             path="/*"
             element={<AuthForm name="login" displayName="Login" />}
-          />
+          /> */}
+          <Route path="/*" element={<Store />} />
           <Route
             path="/login"
             element={<AuthForm name="login" displayName="Login" />}
@@ -47,6 +51,8 @@ const AppRoutes = () => {
           <Route path="/products/:id" element={<SingleProduct />} />
           {/* <Route path="/orders" element={<AllOrders />} />
           <Route path="/orders/:id" element={<SingleOrder />} /> */}
+          <Route path="/success" element={<Success />} />
+          <Route path="/canceled" element={<Canceled />} />
         </Routes>
       )}
     </div>

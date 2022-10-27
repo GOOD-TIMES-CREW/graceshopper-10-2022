@@ -65,18 +65,3 @@ footer {
   text-align: right;
   zoom: 1.5;
 }
-
-a:link {
-  color: red;
-}
-a:visited {
-  color: green;
-}
-a:hover {
-  color: white;
-}
-a:active {
-  color: blue;
-}
-
-/* yes */

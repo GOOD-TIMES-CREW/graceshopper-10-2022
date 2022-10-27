@@ -57,6 +57,7 @@ const products = [
     inventory: 100,
   },
   {
+    stripeId: "price_1LxNkYJfLED86s3eCISPnKJ6",
     name: "Kirby Tilt N' Tumble",
     imageUrl: "https://i.ibb.co/Cm2sCW3/kirbytilt.png",
     description:
@@ -66,6 +67,7 @@ const products = [
     inventory: 100,
   },
   {
+    stripeId: "price_1LxNljJfLED86s3ekKpNzB4w",
     name: "Pokemon Yellow: Special Pikachu Edition",
     imageUrl: "https://i.ibb.co/S5R3Fnb/pokemonyellow.jpg",
     description:
