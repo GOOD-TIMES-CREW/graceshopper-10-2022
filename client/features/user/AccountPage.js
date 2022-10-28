@@ -3,6 +3,7 @@ import { fetchSingleUser } from "./userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import OrderHistory from "./OrderHistory";
+import EditUser from "./EditUser";
 
 function AccountPage() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ function AccountPage() {
         Hi, {user.firstName} {user.lastName}!
       </h1>
       <p>Email: {user.email}</p>
+      <EditUser />
       <OrderHistory />
     </div>
   );
