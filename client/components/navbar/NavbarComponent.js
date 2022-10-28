@@ -46,6 +46,7 @@ function NavbarComponent() {
                 <Nav.Link href="/login">Login</Nav.Link>
                 <Nav.Link href="/signup">Sign Up</Nav.Link>
                 <Nav.Link href="/products">All Products</Nav.Link>
+                <Nav.Link href="/order_history">Order History</Nav.Link>
               </Nav>
               <Navbar.Toggle />
               <Navbar.Collapse className="justify-content-end">

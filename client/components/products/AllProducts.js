@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchAllProducts } from "../../features/productsSlice";
 import { useNavigate } from "react-router-dom";
 import ProductCard from "../products/ProductCard";
+import { deleteProduct } from "../../features/productsSlice";
 
 function AllProducts() {
   const dispatch = useDispatch();
@@ -13,6 +14,10 @@ function AllProducts() {
     dispatch(fetchAllProducts());
   }, [dispatch]);
 
+  const handleDeleteProduct = (id) => {
+    dispatch(deleteProduct(id));
+  };
+
   return (
     <>
       <h1 align="center" className="p-3">
@@ -21,7 +26,10 @@ function AllProducts() {
       <Row xs={1} md={3} className="g-4">
         {products?.map((product) => (
           <Col align="center" key={product.id}>
-            <ProductCard product={product} />
+            <ProductCard
+              product={product}
+              handleDeleteProduct={handleDeleteProduct}
+            />
           </Col>
         ))}
       </Row>
