@@ -12,7 +12,8 @@ import Canceled from "../features/cart/Canceled";
 import Store from "../features/cart/Store";
 import Register from "../features/registration/Register";
 import AccountPage from "../features/user/AccountPage";
-import AllUsers from "../features/user/AllUsers";
+// import AllUsers from "../features/user/AllUsers";
+import ErrorPage from "../features/error/ErrorPage";
 
 /**
  * COMPONENT
@@ -39,7 +40,7 @@ const AppRoutes = () => {
             path="/*"
             element={<AuthForm name="login" displayName="Login" />}
           /> */}
-          <Route path="/*" element={<Store />} />
+          <Route path="/" element={<Store />} />
           <Route path="/register" element={<Register />} />
           <Route
             path="/login"
@@ -54,11 +55,12 @@ const AppRoutes = () => {
           <Route path="/order_history" element={<OrderHistory />} />
           <Route path="/products" element={<AllProducts />} />
           <Route path="/products/:id" element={<SingleProduct />} />
-          <Route path="/users" element={<AllUsers/>}/>
+          {/* <Route path="/users" element={<AllUsers/>}/> */}
           {/* <Route path="/orders" element={<AllOrders />} />
           <Route path="/orders/:id" element={<SingleOrder />} /> */}
           <Route path="/success" element={<Success />} />
           <Route path="/canceled" element={<Canceled />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       )}
     </div>
