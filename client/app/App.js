@@ -5,6 +5,7 @@ import NavbarComponent from "../components/navbar/NavbarComponent";
 import AppRoutes from "./AppRoutes";
 import { Container } from "react-bootstrap";
 import CartProvider from "../components/cart/CartContext";
+import Footer from "../components/footer/Footer";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Container>
           <NavbarComponent />
           <AppRoutes />
+          <Footer />
         </Container>
       </CartProvider>
     </div>
