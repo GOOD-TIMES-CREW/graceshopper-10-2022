@@ -7,13 +7,12 @@ import OrderHistory from "./OrderHistory";
 function AccountPage() {
   const dispatch = useDispatch();
   const { id } = useParams();
-
   const user = useSelector((state) => state.users.user);
-  console.log(user);
 
   useEffect(() => {
     dispatch(fetchSingleUser(id));
   }, [dispatch]);
+
   return (
     <div className="single-user">
       <h1>
