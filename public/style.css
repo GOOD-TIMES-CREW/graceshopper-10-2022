@@ -23,12 +23,6 @@ form div {
   display: inline-block;
 }
 
-footer {
-  background-color: white;
-  color: black;
-  padding: 2rem;
-}
-
 .all-products {
   display: flex;
   flex-wrap: wrap;
@@ -55,6 +49,20 @@ footer {
   padding: 0 15px;
 }
 
+.scroll-button {
+  height: 75px;
+  float: right;
+  padding-bottom: 40px;
+}
+
+.copyright-section {
+  background-color: bisque;
+}
+
+.error-img {
+  width: 600px;
+  padding-top: 40px;
+}
 * {
   margin: 0;
   padding: 0;
@@ -63,5 +71,5 @@ footer {
 
 #icons {
   text-align: right;
-  zoom: 1.5;
+  zoom: 2;
 }
