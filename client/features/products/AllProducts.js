@@ -1,17 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllProducts } from "./productsSlice";
-import { useNavigate } from "react-router-dom";
 import ProductCard from "./ProductCard";
+import Pagination from "../pagination/Pagination";
 
 function AllProducts() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10);
 
   useEffect(() => {
     dispatch(fetchAllProducts());
   }, [dispatch]);
+
+  // PAGINATION
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentProducts = products.slice(indexOfFirstPost, indexOfLastPost);
+  const howManyPages = Math.ceil(products.length / postsPerPage);
 
   return (
     <>
@@ -25,6 +33,7 @@ function AllProducts() {
           </Col>
         ))}
       </Row>
+      {/* <Pagination pages={howManyPages} setCurrentPage={setCurrentPage} /> */}
     </>
   );
 }

@@ -24,6 +24,8 @@ const App = () => {
 
 export default App;
 
+//genre table
+
 // import React from "react";
 // import { Route, Routes } from "react-router-dom";
 // import Navbar from "../components/navbar/Navbar";
