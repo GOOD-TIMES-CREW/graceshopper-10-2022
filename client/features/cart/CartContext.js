@@ -2,7 +2,10 @@ import React, { createContext, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllProducts } from "../../features/products/productsSlice";
 
+// creating helper functions for interacting with products in our cart
+
 export const CartContext = createContext({
+  // export to give app access
   items: [],
   getProductQuantity: () => {},
   addOneToCart: () => {},
@@ -11,10 +14,13 @@ export const CartContext = createContext({
   getTotalCost: () => {},
 });
 
+// code here for the functions inside the context
+
 export function CartProvider({ children }) {
+  // gives react app access to all the things in our context
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
-  const [cartProducts, setCartProducts] = useState([]);
+  const [cartProducts, setCartProducts] = useState([]); // this is what is in our cart
 
   useEffect(() => {
     dispatch(fetchAllProducts());
@@ -34,7 +40,7 @@ export function CartProvider({ children }) {
     if (quantity === 0) {
       // product is not in the cart, we must establish item
       setCartProducts([
-        ...cartProducts,
+        ...cartProducts, // take all the items already in cart products and then add the new product
         {
           id: id,
           quantity: 1,
@@ -45,7 +51,7 @@ export function CartProvider({ children }) {
       setCartProducts(
         cartProducts.map((product) =>
           product.id === id
-            ? { ...product, quantity: product.quantity + 1 }
+            ? { ...product, quantity: product.quantity + 1 } // product is an object so we need to get all the info from inside of that to overwrite the quantity
             : product
         )
       );
@@ -61,7 +67,7 @@ export function CartProvider({ children }) {
       setCartProducts(
         cartProducts.map((product) =>
           product.id === id
-            ? { ...product, quantity: product.quantity - 1 }
+            ? { ...product, quantity: product.quantity - 1 } // product is an object so we need to get all the info from inside of that to overwrite the quantity
             : product
         )
       );
