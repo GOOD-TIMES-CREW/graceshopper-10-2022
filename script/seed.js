@@ -677,7 +677,7 @@ const products = [
 
 const orders = [
   {
-    status: "fulfilled",
+    status: "unfulfilled",
     shipped: false,
     confirmationNumber: "001",
     shipping_address: "123 Main St, Los Angeles, CA",
@@ -685,8 +685,8 @@ const orders = [
     userId: 1,
   },
   {
-    status: "fulfilled",
-    shipped: true,
+    status: "unfulfilled",
+    shipped: false,
     confirmationNumber: "002",
     shipping_address: "123 Mango St, Miami, FL",
     dateOrdered: "2022-10-20",
