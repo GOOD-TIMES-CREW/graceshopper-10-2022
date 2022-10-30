@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchAllProducts } from "./productsSlice";
 import ProductCard from "./ProductCard";
 import Pagination from "../pagination/Pagination";
-import { deleteProduct } from "../../features/productsSlice";
+import { deleteProduct } from "./productsSlice";
 
 function AllProducts() {
   const dispatch = useDispatch();
