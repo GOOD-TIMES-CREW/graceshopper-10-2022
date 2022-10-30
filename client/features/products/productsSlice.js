@@ -26,7 +26,6 @@ export const fetchSingleProduct = createAsyncThunk(
 );
 
 export const addProduct = createAsyncThunk("addProduct", async (newProduct) => {
-  console.log(newProduct, "TESTTTTTT")
   const { data } = await axios.post("/api/products", newProduct);
   return data;
 });

@@ -26,7 +26,6 @@ router.get("/:id", async (req, res, next) => {
 // POST /api/products
 router.post("/", async (req, res, next) => {
   try {
-    console.log(req.body, "OBAMAAAAA");
     const product = await Product.create(req.body);
     res.json(product);
   } catch (error) {

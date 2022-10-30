@@ -64,7 +64,7 @@ const AppRoutes = () => {
           <Route path="/success" element={<Success />} />
           <Route path="/canceled" element={<Canceled />} />
           <Route path="*" element={<ErrorPage />} />
-          <Route path="/products/addproduct" element={<AddProduct />} />
+          <Route path="/products/add" element={<AddProduct />} />
         </Routes>
       )}
     </div>

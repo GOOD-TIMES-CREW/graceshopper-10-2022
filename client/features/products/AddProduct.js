@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { addProduct } from "./productsSlice";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-// May have to come back and double check file path
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
   const [name, setName] = useState("");
@@ -15,9 +15,9 @@ const AddProduct = () => {
   const [system, setSystem] = useState("");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (evt) => {
-    console.log(name, "YOOOOOOO");
     evt.preventDefault();
     dispatch(
       addProduct({
@@ -30,6 +30,7 @@ const AddProduct = () => {
         system,
       })
     );
+    navigate("/products");
   };
 
   return (
