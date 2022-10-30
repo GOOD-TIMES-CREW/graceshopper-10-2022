@@ -35,6 +35,10 @@ form div {
   text-align: center;
 }
 
+.font-validation {
+  color: red;
+}
+
 .footer-row {
   display: flex;
   flex-wrap: wrap;
@@ -63,6 +67,7 @@ form div {
   width: 600px;
   padding-top: 40px;
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -72,4 +77,8 @@ form div {
 #icons {
   text-align: right;
   zoom: 2;
+}
+
+#underline {
+  text-decoration: underline;
 }

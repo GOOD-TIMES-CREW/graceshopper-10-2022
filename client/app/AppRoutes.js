@@ -14,6 +14,7 @@ import Register from "../features/registration/Register";
 import AccountPage from "../features/user/AccountPage";
 import AllUsers from "../features/user/AllUsers";
 import ErrorPage from "../features/error/ErrorPage";
+import Login from "../features/login/Login";
 
 /**
  * COMPONENT
@@ -42,14 +43,15 @@ const AppRoutes = () => {
           /> */}
           <Route path="/" element={<Store />} />
           <Route path="/register" element={<Register />} />
-          <Route
+          <Route path="/login" element={<Login />} />
+          {/* <Route
             path="/login"
             element={<AuthForm name="login" displayName="Login" />}
-          />
-          <Route
+          /> */}
+          {/* <Route
             path="/signup"
             element={<AuthForm name="signup" displayName="Sign Up" />}
-          />
+          /> */}
 
           <Route path="/order_history" element={<OrderHistory />} />
           <Route path="/products" element={<AllProducts />} />
