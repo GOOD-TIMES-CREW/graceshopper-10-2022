@@ -52,7 +52,6 @@ const OrderHistory = () => {
     dispatch(fetchUserOrderHistory(id));
   }, [dispatch]);
 
-  console.log("IN ORDER HISTORY COMPONENT", orderHistory);
   return (
     <div>
       <h1>Order History</h1>

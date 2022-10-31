@@ -15,6 +15,7 @@ import AccountPage from "../features/user/AccountPage";
 import AllUsers from "../features/user/AllUsers";
 import ErrorPage from "../features/error/ErrorPage";
 import Login from "../features/login/Login";
+import AddProduct from "../features/products/AddProduct";
 
 /**
  * COMPONENT
@@ -37,11 +38,11 @@ const AppRoutes = () => {
         </Routes>
       ) : (
         <Routes>
-          {/* <Route
+          <Route
             path="/*"
             element={<AuthForm name="login" displayName="Login" />}
-          /> */}
-          <Route path="/" element={<Store />} />
+          />
+          {/* <Route path="/" element={<Store />} /> */}
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           {/* <Route
@@ -63,6 +64,7 @@ const AppRoutes = () => {
           <Route path="/success" element={<Success />} />
           <Route path="/canceled" element={<Canceled />} />
           <Route path="*" element={<ErrorPage />} />
+          <Route path="/products/add" element={<AddProduct />} />
         </Routes>
       )}
     </div>
