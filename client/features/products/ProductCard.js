@@ -1,9 +1,17 @@
 import React, { useContext } from "react";
-import { Card, Button, Form, Row, Col } from "react-bootstrap";
+import {
+  Card,
+  Button,
+  Form,
+  Row,
+  Col,
+  Container,
+  Stack,
+} from "react-bootstrap";
 import { CartContext } from "../cart/CartContext";
 import { useNavigate } from "react-router-dom";
 
-function ProductCard({ product }) {
+function ProductCard({ product, handleDeleteProduct }) {
   const Navigate = useNavigate();
   const cart = useContext(CartContext);
   const productQuantity = cart.getProductQuantity(product.id);
@@ -50,12 +58,21 @@ function ProductCard({ product }) {
             </Button>
           </>
         ) : (
-          <Button
-            variant="primary"
-            onClick={() => cart.addOneToCart(product.id)}
-          >
-            Add To Cart
-          </Button>
+          <Stack direction="horizontal" gap={3}>
+            <Button
+              variant="primary"
+              onClick={() => cart.addOneToCart(product.id)}
+            >
+              Add To Cart
+            </Button>
+            <div className="vr" />
+            <Button
+              variant="danger"
+              onClick={() => handleDeleteProduct(product.id)}
+            >
+              Delete Product
+            </Button>
+          </Stack>
         )}
       </Card.Body>
     </Card>

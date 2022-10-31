@@ -25,23 +25,15 @@ export const fetchSingleProduct = createAsyncThunk(
   }
 );
 
-// export const addProduct = createAsyncThunk(
-//   "addProduct",
-//   async (name, image, description) => {
-//     const { data } = await axios.post(
-//       "/api/products",
-//       name,
-//       image,
-//       description
-//     );
-//     return data;
-//   }
-// );
+export const addProduct = createAsyncThunk("addProduct", async (newProduct) => {
+  const { data } = await axios.post("/api/products", newProduct);
+  return data;
+});
 
-// export const deleteProduct = createAsyncThunk("deleteProduct", async (id) => {
-//   const { data } = await axios.delete(`/api/products/${id}`);
-//   return data;
-// });
+export const deleteProduct = createAsyncThunk("deleteProduct", async (id) => {
+  const { data } = await axios.delete(`/api/products/${id}`);
+  return data;
+});
 
 export const productsSlice = createSlice({
   name: "products",
@@ -57,15 +49,14 @@ export const productsSlice = createSlice({
       builder.addCase(fetchSingleProduct.fulfilled, (state, action) => {
         state.product = action.payload;
       });
-    // builder.addCase(addProduct.fulfilled, (state, action) => {
-    //   state.push(action.payload);
-    // }),
-    // builder.addCase(deleteProduct.fulfilled, (state, action) => {
-    //   const newProduct = state.filter(
-    //     (product) => product.id !== action.payload.id
-    //   );
-    //   return newProduct;
-    // });
+    builder.addCase(addProduct.fulfilled, (state, action) => {
+      state.push(action.payload);
+    }),
+      builder.addCase(deleteProduct.fulfilled, (state, action) => {
+        state.products = state.products.filter(
+          (product) => product.id !== action.payload.id
+        );
+      });
   },
 });
 

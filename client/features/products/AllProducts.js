@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchAllProducts } from "./productsSlice";
 import ProductCard from "./ProductCard";
 import Pagination from "../pagination/Pagination";
+import { deleteProduct } from "./productsSlice";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 function AllProducts() {
   const dispatch = useDispatch();
@@ -21,15 +24,26 @@ function AllProducts() {
   const currentProducts = products.slice(indexOfFirstPost, indexOfLastPost);
   const howManyPages = Math.ceil(products.length / postsPerPage);
 
+  const handleDeleteProduct = (id) => {
+    dispatch(deleteProduct(id));
+  };
+
   return (
     <>
       <h1 align="center" className="p-3">
         All Products
       </h1>
+
+      <Link to="/products/add">
+        <Button variant="primary">Add Product Form</Button>
+      </Link>
       <Row xs={1} md={3} className="g-4">
         {products?.map((product) => (
           <Col align="center" key={product.id}>
-            <ProductCard product={product} />
+            <ProductCard
+              product={product}
+              handleDeleteProduct={handleDeleteProduct}
+            />
           </Col>
         ))}
       </Row>
