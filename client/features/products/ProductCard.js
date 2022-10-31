@@ -22,12 +22,12 @@ function ProductCard({ product, handleDeleteProduct }) {
   const Navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  const productQuantity = cart.cartTotalQuantity;
   const getCurrentProductQuantity = (product) => {
     for (let i = 0; i < cart.cartProducts.length; i++) {
       if (product.name === cart.cartProducts[i].name)
         return cart.cartProducts[i].cartQuantity;
     }
+    return 0;
   };
 
   const handleRemoveFromCart = (cartProduct) => {
@@ -54,7 +54,7 @@ function ProductCard({ product, handleDeleteProduct }) {
         />
         <Card.Title>{product.name}</Card.Title>
         <Card.Text>${product.price}</Card.Text>
-        {productQuantity > 0 ? (
+        {getCurrentProductQuantity(product) > 0 ? (
           <>
             <Form as={Row}>
               <Form.Label column="true" sm="6">
