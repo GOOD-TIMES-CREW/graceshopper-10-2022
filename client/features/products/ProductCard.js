@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import {
   Card,
   Button,
@@ -10,11 +10,39 @@ import {
 } from "react-bootstrap";
 import { CartContext } from "../cart/CartContext";
 import { useNavigate } from "react-router-dom";
+import {
+  addToCart,
+  decrementQuantity,
+  getAmount,
+  removeFromCart,
+} from "../cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function ProductCard({ product, handleDeleteProduct }) {
   const Navigate = useNavigate();
-  const cart = useContext(CartContext);
-  const productQuantity = cart.getProductQuantity(product.id);
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  const productQuantity = cart.cartTotalQuantity;
+  const getCurrentProductQuantity = (product) => {
+    for (let i = 0; i < cart.cartProducts.length; i++) {
+      if (product.name === cart.cartProducts[i].name)
+        return cart.cartProducts[i].cartQuantity;
+    }
+  };
+
+  const handleRemoveFromCart = (cartProduct) => {
+    dispatch(removeFromCart(cartProduct));
+  };
+  const handleDecrement = (cartProduct) => {
+    dispatch(decrementQuantity(cartProduct));
+  };
+  const handleAdd = (cartProduct) => {
+    dispatch(addToCart(cartProduct));
+  };
+
+  useEffect(() => {
+    dispatch(getAmount());
+  }, [cart]);
 
   return (
     <Card>
@@ -30,19 +58,19 @@ function ProductCard({ product, handleDeleteProduct }) {
           <>
             <Form as={Row}>
               <Form.Label column="true" sm="6">
-                In Cart: {productQuantity}
+                In Cart: {getCurrentProductQuantity(product)}
               </Form.Label>
               <Col sm="6">
                 <Button
                   sm="6"
-                  onClick={() => cart.addOneToCart(product.id)}
+                  onClick={() => handleAdd(product)}
                   className="mx-2"
                 >
                   +
                 </Button>
                 <Button
                   sm="6"
-                  onClick={() => cart.removeOneFromCart(product.id)}
+                  onClick={() => handleDecrement(product)}
                   className="mx-2"
                 >
                   -
@@ -51,7 +79,7 @@ function ProductCard({ product, handleDeleteProduct }) {
             </Form>
             <Button
               variant="danger"
-              onClick={() => cart.deleteFromCart(product.id)}
+              onClick={() => handleRemoveFromCart(product)}
               className="my-2"
             >
               Remove from cart
@@ -59,10 +87,7 @@ function ProductCard({ product, handleDeleteProduct }) {
           </>
         ) : (
           <Stack direction="horizontal" gap={3}>
-            <Button
-              variant="primary"
-              onClick={() => cart.addOneToCart(product.id)}
-            >
+            <Button variant="primary" onClick={() => handleAdd(product)}>
               Add To Cart
             </Button>
             <div className="vr" />
