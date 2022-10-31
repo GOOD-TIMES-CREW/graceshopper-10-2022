@@ -11,7 +11,7 @@ import {
 import { CartContext } from "../cart/CartContext";
 import { useNavigate } from "react-router-dom";
 
-function ProductCard({ product, handleDeleteProduct }) {
+function ProductCard({ product, handleDeleteProduct, isAdmin }) {
   const Navigate = useNavigate();
   const cart = useContext(CartContext);
   const productQuantity = cart.getProductQuantity(product.id);
@@ -65,13 +65,18 @@ function ProductCard({ product, handleDeleteProduct }) {
             >
               Add To Cart
             </Button>
-            <div className="vr" />
-            <Button
-              variant="danger"
-              onClick={() => handleDeleteProduct(product.id)}
-            >
-              Delete Product
-            </Button>
+
+            {isAdmin && (
+              <>
+                <div className="vr" />
+                <Button
+                  variant="danger"
+                  onClick={() => handleDeleteProduct(product.id)}
+                >
+                  Delete Product
+                </Button>
+              </>
+            )}
           </Stack>
         )}
       </Card.Body>

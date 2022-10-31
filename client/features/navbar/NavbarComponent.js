@@ -5,9 +5,19 @@ import { logout } from "../../app/store";
 import { Button, Container, Navbar, Nav, Modal } from "react-bootstrap";
 import { CartContext } from "../cart/CartContext";
 import CartProduct from "../cart/CartProduct";
+import { me } from "../auth/authSlice";
 
 function NavbarComponent() {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+
+  // Once authentication is fixed comment this line back in and delete hardcoded line
+  // const isAdmin = useSelector((state) => state.auth.me.isAdmin);
+  const isAdmin = false;
+
+  useEffect(() => {
+    dispatch(me());
+  }, []);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logoutAndRedirectHome = () => {
@@ -47,7 +57,14 @@ function NavbarComponent() {
                 <Nav.Link href="/register">Sign Up</Nav.Link>
                 <Nav.Link href="/products">All Products</Nav.Link>
                 {/*Temporary, will switch this to only show up when admin is logged in later*/}
-                <Nav.Link href="/users">All Users</Nav.Link>
+                {isAdmin && (
+                  <>
+                    {" "}
+                    <Nav.Link href="/users">All Users</Nav.Link>{" "}
+                    <Nav.Link href="/allorders">All Orders</Nav.Link>{" "}
+                  </>
+                )}
+
                 <Nav.Link href="/order_history">Order History</Nav.Link>
               </Nav>
               <Navbar.Toggle />
