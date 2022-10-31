@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../app/store";
 import { Button, Container, Navbar, Nav, Modal } from "react-bootstrap";
-import { CartContext } from "../cart/CartContext";
 import CartProduct from "../cart/CartProduct";
 import { getAmount } from "../cart/cartSlice";
 

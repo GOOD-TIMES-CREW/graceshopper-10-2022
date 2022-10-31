@@ -8,7 +8,6 @@ import {
   Container,
   Stack,
 } from "react-bootstrap";
-import { CartContext } from "../cart/CartContext";
 import { useNavigate } from "react-router-dom";
 import {
   addToCart,

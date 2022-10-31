@@ -1,14 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAllProducts } from "../../features/products/productsSlice";
 import Button from "react-bootstrap/Button";
-// import { CartContext } from "./CartContext";
-import {
-  addToCart,
-  decrementQuantity,
-  getAmount,
-  removeFromCart,
-} from "./cartSlice";
+import { getAmount, removeFromCart } from "./cartSlice";
 
 function CartProduct(props) {
   const dispatch = useDispatch();
@@ -23,12 +16,6 @@ function CartProduct(props) {
   const handleRemoveFromCart = (cartProduct) => {
     dispatch(removeFromCart(cartProduct));
   };
-  // const handleDecrement = (cartProduct) => {
-  //   dispatch(decrementQuantity(cartProduct))
-  // };
-  // const handleAdd = (cartProduct) => {
-  //   dispatch(addToCart(cartProduct))
-  // }
 
   return (
     <>
