@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchAllProducts } from "./productsSlice";
 import ProductCard from "./ProductCard";
 import Pagination from "../pagination/Pagination";
+import Sidebar from "../sidebar/Sidebar";
 
 function AllProducts() {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ function AllProducts() {
       <h1 align="center" className="p-3">
         All Products
       </h1>
+      <Sidebar />
       <Row xs={1} md={3} className="g-4">
         {products?.map((product) => (
           <Col align="center" key={product.id}>
