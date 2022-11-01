@@ -6,7 +6,6 @@ import userSliceReducer from "../features/user/userSlice";
 import orderSliceReducer from "../features/user/orderSlice";
 import cartSliceReducer from "../features/cart/cartSlice";
 
-// import wishlistSliceReducer from "../features/wishlistSlice";
 
 const store = configureStore({
   reducer: {
@@ -15,8 +14,6 @@ const store = configureStore({
     users: userSliceReducer,
     cart: cartSliceReducer,
     orders: orderSliceReducer,
-
-    // wishlist: wishlistSliceReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
