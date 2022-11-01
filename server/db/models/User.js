@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const SALT_ROUNDS = 5;
-//test
 const User = db.define("user", {
   firstName: {
     type: Sequelize.STRING,
@@ -27,7 +26,6 @@ const User = db.define("user", {
   },
 });
 
-//fixed
 module.exports = User;
 
 /**

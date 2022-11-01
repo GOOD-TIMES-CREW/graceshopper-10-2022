@@ -2,19 +2,41 @@ import React, { useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Card, Button, Form, Row, Col } from "react-bootstrap";
-import { CartContext } from "../cart/CartContext";
 import { fetchSingleProduct } from "./productsSlice.js";
+import {
+  addToCart,
+  decrementQuantity,
+  getAmount,
+  removeFromCart,
+} from "../cart/cartSlice";
 
 function SingleProduct() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const cart = useContext(CartContext);
   const product = useSelector((state) => state.products.product);
-  const productQuantity = cart.getProductQuantity(product.id);
+  const cart = useSelector((state) => state.cart);
+  const getCurrentProductQuantity = (product) => {
+    for (let i = 0; i < cart.cartProducts.length; i++) {
+      if (product.name === cart.cartProducts[i].name)
+        return cart.cartProducts[i].cartQuantity;
+    }
+    return 0;
+  };
+
+  const handleRemoveFromCart = (cartProduct) => {
+    dispatch(removeFromCart(cartProduct));
+  };
+  const handleDecrement = (cartProduct) => {
+    dispatch(decrementQuantity(cartProduct));
+  };
+  const handleAdd = (cartProduct) => {
+    dispatch(addToCart(cartProduct));
+  };
 
   useEffect(() => {
     dispatch(fetchSingleProduct(id));
-  }, [dispatch]);
+    dispatch(getAmount());
+  }, [dispatch, cart]);
 
   return (
     <Card>
@@ -27,23 +49,23 @@ function SingleProduct() {
         <Card.Title>{product.name}</Card.Title>
         <Card.Text>${product.price}</Card.Text>
         <Card.Text>${product.description}</Card.Text>
-        {productQuantity > 0 ? (
+        {getCurrentProductQuantity(product) ? (
           <>
             <Form as={Row}>
               <Form.Label column="true" sm="6">
-                In Cart: {productQuantity}
+                In Cart: {getCurrentProductQuantity(product)}
               </Form.Label>
               <Col sm="6">
                 <Button
                   sm="6"
-                  onClick={() => cart.addOneToCart(product.id)}
+                  onClick={() => handleAdd(product)}
                   className="mx-2"
                 >
                   +
                 </Button>
                 <Button
                   sm="6"
-                  onClick={() => cart.removeOneFromCart(product.id)}
+                  onClick={() => handleDecrement(product)}
                   className="mx-2"
                 >
                   -
@@ -52,17 +74,14 @@ function SingleProduct() {
             </Form>
             <Button
               variant="danger"
-              onClick={() => cart.deleteFromCart(product.id)}
+              onClick={() => handleRemoveFromCart(product)}
               className="my-2"
             >
               Remove from cart
             </Button>
           </>
         ) : (
-          <Button
-            variant="primary"
-            onClick={() => cart.addOneToCart(product.id)}
-          >
+          <Button variant="primary" onClick={() => handleAdd(product)}>
             Add To Cart
           </Button>
         )}
@@ -72,17 +91,3 @@ function SingleProduct() {
 }
 
 export default SingleProduct;
-
-// return (
-//   <ul>
-//     <div key={product.id} className="product-label, font-center">
-//       <img src={product.imageUrl} />
-//       <p>{product.name}</p>
-//       <p>{product.description}</p>
-//       <p>${product.price}</p>
-//       <p>Genre: {product.genre}</p>
-//       <p>Current Stock: {product.inventory}</p>
-//       <button>Add to Cart</button>
-//     </div>
-//   </ul>
-// );
