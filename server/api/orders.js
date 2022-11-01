@@ -16,6 +16,7 @@ router.get("/", async (req, res, next) => {
 // GET api/orders/:id
 router.get("/:id", async (req, res, next) => {
   try {
+    // o: always check for the case where you can't find the resource
     const singleOrder = await Order.findByPk(req.params.id);
     res.json(singleOrder);
   } catch (error) {

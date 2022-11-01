@@ -75,6 +75,7 @@ export const usersSlice = createSlice({
       state.push(action.payload);
     }),
       builder.addCase(deleteUser.fulfilled, (state, action) => {
+        // o: you can juse return from the filter statement here
         const newUser = state.filter((user) => user.id !== action.payload.id);
         return newUser;
       });

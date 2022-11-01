@@ -20,6 +20,8 @@ function ProductCard({ product, handleDeleteProduct }) {
   const Navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+
+  // o: I have questions... let's chat during our SM
   const getCurrentProductQuantity = (product) => {
     for (let i = 0; i < cart.cartProducts.length; i++) {
       if (product.name === cart.cartProducts[i].name)

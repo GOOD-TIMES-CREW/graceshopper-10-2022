@@ -6,6 +6,8 @@ import { getAmount, removeFromCart } from "./cartSlice";
 function CartProduct(props) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  
+  // o: destructuring would help redability in this component
   const product = props.product;
 
   useEffect(() => {

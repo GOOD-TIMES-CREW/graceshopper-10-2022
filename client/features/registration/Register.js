@@ -7,6 +7,7 @@ import { MDBCheckbox, MDBBtn, MDBIcon } from "mdb-react-ui-kit";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
+// o: what is this exactly?
 const validation = yup.object().shape({
   firstName: yup.string().required("First Name is required."),
   lastName: yup.string().required("Last Name is required."),

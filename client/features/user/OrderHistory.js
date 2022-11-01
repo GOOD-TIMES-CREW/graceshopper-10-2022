@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 // Potential path and function to fetch order history
 import { fetchUserOrderHistory } from "./orderSlice";
+// o: this doesn't seem like its being used
 import { NavLink } from "react-router-dom";
 
+// o: please remove if not being used
 // Dummy Data for now
 // const orderHistory = [
 //   {
@@ -41,6 +43,8 @@ import { NavLink } from "react-router-dom";
 //   },
 // ];
 
+
+// o: why is this outside of the component?
 // Will get this from somewhere else later...probably from whatever user is logged in when we have that functioonality setup
 const id = 1;
 

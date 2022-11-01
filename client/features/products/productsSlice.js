@@ -1,6 +1,8 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+// o: you don't necessarily want to follow this structure for error handling in
+//  in async thunks... more in our SM
 export const fetchAllProducts = createAsyncThunk(
   "fetchAllProducts",
   async () => {
