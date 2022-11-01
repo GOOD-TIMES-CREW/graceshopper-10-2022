@@ -63,17 +63,6 @@ const OrderHistory = () => {
             <div>Order Status: {order.status}</div>
             <div>Order Date: {order.dateOrdered}</div>
             <div>Order Number: {order.confirmationNumber}</div>
-
-            {/* Could not eager load the products */}
-            {/* <div>
-              <ol>
-                {order.order_products.map((product) => (
-                  <li>
-                    {product.name} {product.price}
-                  </li>
-                ))}
-              </ol>
-            </div> */}
           </div>
         ))}
       </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "react-bootstrap/Button";
 import { getAmount, removeFromCart } from "./cartSlice";
@@ -7,7 +7,6 @@ function CartProduct(props) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const product = props.product;
-  console.log(product);
 
   useEffect(() => {
     dispatch(getAmount());
