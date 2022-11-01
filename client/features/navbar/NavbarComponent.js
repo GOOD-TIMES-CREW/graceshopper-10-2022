@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../app/store";
 import { Button, Container, Navbar, Nav, Modal } from "react-bootstrap";
-import { CartContext } from "../cart/CartContext";
 import CartProduct from "../cart/CartProduct";
+import { getAmount } from "../cart/cartSlice";
 
 function NavbarComponent() {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
@@ -15,14 +15,14 @@ function NavbarComponent() {
     navigate("/login");
   };
   const [show, setShow] = useState(false);
-  const cart = useContext(CartContext);
-  const productsCount = cart.items.reduce(
-    (sum, product) => sum + product.quantity,
-    0
-  );
+  const cart = useSelector((state) => state.cart);
+  const productsCount = cart.cartTotalQuantity;
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  useEffect(() => {
+    dispatch(getAmount());
+  }, [cart]);
   return (
     <>
       {isLoggedIn ? (
@@ -66,15 +66,14 @@ function NavbarComponent() {
               {productsCount > 0 ? (
                 <>
                   <p>Items in your cart:</p>
-                  {cart.items.map((currentProduct, idx) => (
+                  {cart.cartProducts.map((currentProduct, idx) => (
                     <CartProduct
                       key={idx}
-                      id={currentProduct.id}
-                      quantity={currentProduct.quantity}
+                      product={currentProduct}
                     ></CartProduct>
                   ))}
 
-                  <h1>Total: {cart.getTotalCost().toFixed(2)}</h1>
+                  <h1>Total: ${cart.cartTotalPrice}</h1>
                   {/* onClick={checkout} */}
                   <Button variant="success">Purchase items!</Button>
                 </>

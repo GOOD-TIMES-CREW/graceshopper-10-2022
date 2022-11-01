@@ -9,7 +9,6 @@ import { me } from "./store";
 import OrderHistory from "../features/user/OrderHistory";
 import Success from "../features/cart/Success";
 import Canceled from "../features/cart/Canceled";
-import Store from "../features/cart/Store";
 import Register from "../features/registration/Register";
 import AccountPage from "../features/user/AccountPage";
 import AllUsers from "../features/user/AllUsers";
