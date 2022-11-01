@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { Product },
+  models: { Product, User },
 } = require("../db");
 
 // GET /api/products
@@ -26,8 +26,13 @@ router.get("/:id", async (req, res, next) => {
 // POST /api/products
 router.post("/", async (req, res, next) => {
   try {
-    const product = await Product.create(req.body);
-    res.json(product);
+    const loggedInUser = await User.findByToken(req.headers.authorization);
+    if (loggedInUser.isAdmin) {
+      const product = await Product.create(req.body);
+      res.json(product);
+    } else {
+      res.sendStatus(401);
+    }
   } catch (error) {
     next(error);
   }
@@ -36,9 +41,14 @@ router.post("/", async (req, res, next) => {
 // DELETE /api/products/:id
 router.delete("/:id", async (req, res, next) => {
   try {
-    const product = await Product.findByPk(req.params.id);
-    await product.destroy();
-    res.send(product);
+    const loggedInUser = await User.findByToken(req.headers.authorization);
+    if (loggedInUser.isAdmin) {
+      const product = await Product.findByPk(req.params.id);
+      await product.destroy();
+      res.send(product);
+    } else {
+      res.sendStatus(401);
+    }
   } catch (error) {
     next(error);
   }
