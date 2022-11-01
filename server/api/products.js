@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { Product },
+  models: { Product, Order_Product },
 } = require("../db");
 
 // GET /api/products
