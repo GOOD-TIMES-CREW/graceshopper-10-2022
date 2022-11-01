@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../app/store";
@@ -74,7 +74,6 @@ function NavbarComponent() {
                   ))}
 
                   <h1>Total: ${cart.cartTotalPrice}</h1>
-                  {/* onClick={checkout} */}
                   <Button variant="success">Purchase items!</Button>
                 </>
               ) : (

@@ -31,5 +31,4 @@ const Product = db.define("product", {
   },
 });
 
-//fixed
 module.exports = Product;

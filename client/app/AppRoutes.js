@@ -32,34 +32,18 @@ const AppRoutes = () => {
     <div>
       {isLoggedIn ? (
         <Routes>
-          <Route path="/*" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route to="/home" element={<Home />} />
         </Routes>
       ) : (
         <Routes>
-          <Route
-            path="/*"
-            element={<AuthForm name="login" displayName="Login" />}
-          />
-          {/* <Route path="/" element={<Store />} /> */}
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          {/* <Route
-            path="/login"
-            element={<AuthForm name="login" displayName="Login" />}
-          /> */}
-          {/* <Route
-            path="/signup"
-            element={<AuthForm name="signup" displayName="Sign Up" />}
-          /> */}
-
           <Route path="/order_history" element={<OrderHistory />} />
           <Route path="/products" element={<AllProducts />} />
           <Route path="/products/:id" element={<SingleProduct />} />
           <Route path="/users" element={<AllUsers />} />
           <Route path="/users/:id" element={<AccountPage />} />
-          {/* <Route path="/orders" element={<AllOrders />} />
-          <Route path="/orders/:id" element={<SingleOrder />} /> */}
           <Route path="/success" element={<Success />} />
           <Route path="/canceled" element={<Canceled />} />
           <Route path="*" element={<ErrorPage />} />
@@ -71,31 +55,3 @@ const AppRoutes = () => {
 };
 
 export default AppRoutes;
-
-// return (
-//   <div>
-//     {isLoggedIn ? (
-//       <Routes>
-//         <Route path="/*" element={<Home />} />
-//         <Route to="/home" element={<Home />} />
-//         {/* <Route path="/allproducts" element={<AllProducts />} /> */}
-//       </Routes>
-//     ) : (
-//       <Routes>
-//         <Route
-//           path="/*"
-//           element={<AuthForm name="login" displayName="Login" />}
-//         />
-//         <Route
-//           path="/login"
-//           element={<AuthForm name="login" displayName="Login" />}
-//         />
-//         <Route
-//           path="/signup"
-//           element={<AuthForm name="signup" displayName="Sign Up" />}
-//         />
-//       </Routes>
-//     )}
-//   </div>
-// );
-// };

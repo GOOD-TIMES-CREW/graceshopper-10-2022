@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useFormik } from "formik";
@@ -12,8 +12,6 @@ const validation = yup.object().shape({
 function Login() {
   const onSubmit = (values, actions) => {
     actions.resetForm();
-
-    //ADD FUNCTIONALITY TO GO TO ACCOUNT PAGE BASED ON VALUES(CREDENTIALS) HERE
   };
 
   const { values, errors, touched, handleSubmit, handleChange } = useFormik({

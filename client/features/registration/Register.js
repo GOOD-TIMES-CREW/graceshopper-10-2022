@@ -18,16 +18,8 @@ const validation = yup.object().shape({
 });
 
 function Register() {
-  // const dispatch = useDispatch();
-  // const [firstName, setFirstName] = useState("");
-  // const [lastName, setLastName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-
   const onSubmit = (values, actions) => {
     actions.resetForm();
-
-    //ADD FUNCTIONALITY TO GO TO ACCOUNT PAGE BASED ON VALUES(CREDENTIALS) HERE
   };
 
   const { values, errors, touched, handleSubmit, handleChange } = useFormik({
@@ -42,14 +34,6 @@ function Register() {
     onSubmit,
   });
 
-  // const handleSubmit = (evt) => {
-  //   evt.preventDefault();
-  //   dispatch(createUser({ firstName, lastName, email, password }));
-  //   setFirstName("");
-  //   setLastName("");
-  //   setEmail("");
-  //   setPassword("");
-  // };
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Label id="underline">
