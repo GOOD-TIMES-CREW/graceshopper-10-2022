@@ -16,7 +16,12 @@ router.get("/:id/cart", async (req, res, next) => {
         userId: req.params.id,
       },
     });
-    res.json(order);
+    const orderProducts = await Order_Product.findAll({
+      where: {
+        orderId: order.id,
+      },
+    });
+    res.json(orderProducts);
   } catch (err) {
     next(err);
   }
@@ -48,16 +53,18 @@ router.put("/:id/cart", async (req, res, next) => {
     const orderProduct = await Order_Product.findOrCreate({
       where: {
         orderId: order.id,
-        productId: req.body.productId,
+        productId: req.body.data.productId,
       },
       defaults: {
         orderId: order.id,
-        productId: req.body.productId,
+        productId: req.body.data.productId,
+        quantity: 1,
       },
     });
+    console.log(req.body.data.totalQuantity, orderProduct);
     if (orderProduct.quantity >= 1) {
       orderProduct.update({
-        quantity: req.body.totalQuantity++,
+        quantity: req.body.data.totalQuantity++,
       });
     }
     res.json(orderProduct);
@@ -69,12 +76,12 @@ router.put("/:id/cart", async (req, res, next) => {
 // DELETE /users/:id/cart
 router.delete("/:id/cart", async (req, res, next) => {
   try {
-    const [order] = await Order.findOne({
+    const order = await Order.findOne({
       where: {
         userId: req.params.id,
       },
     });
-    const orderProduct = findOne({
+    const orderProduct = await Order_Product.findOne({
       where: {
         orderId: order.id,
         productId: req.body.productId,

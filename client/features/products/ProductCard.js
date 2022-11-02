@@ -15,6 +15,7 @@ function ProductCard({ product, handleDeleteProduct, isAdmin }) {
   const dispatch = useDispatch();
   const userId = 1;
   const cart = useSelector((state) => state.cart);
+  const userCart = useSelector((state) => state.userCart);
   const getCurrentProductQuantity = (product) => {
     for (let i = 0; i < cart.cartProducts.length; i++) {
       if (product.name === cart.cartProducts[i].name)
@@ -22,46 +23,61 @@ function ProductCard({ product, handleDeleteProduct, isAdmin }) {
     }
     return 0;
   };
+  const getCurrentCartProduct = (product) => {
+    if (userId) {
+      for (let i = 0; i < userCart.cartProducts.length; i++) {
+        if (product.name === userCart.cartProducts[i].name)
+          return userCart.cartProducts[i];
+      }
+    } else {
+      for (let i = 0; i < cart.cartProducts.length; i++) {
+        if (product.name === cart.cartProducts[i].name)
+          return cart.cartProducts[i];
+      }
+    }
+    return 0;
+  };
 
-  const handleRemoveFromCart = (product) => {
+  const handleRemoveFromCart = (cartProduct) => {
     if (userId) {
       dispatch(removeFromCart(product));
       dispatch(
         removeFromUserCart({
           productId: product.id,
           userId,
-          quantityRemoved: product.cartQuantity,
-          totalQuantity: product.cartQuantity,
+          quantityRemoved: cartProduct.cartQuantity,
+          totalQuantity: cartProduct.cartQuantity,
         })
       );
     } else {
-      dispatch(removeFromCart(product));
+      dispatch(removeFromCart(cartProduct));
     }
   };
-  const handleDecrement = (product) => {
+  const handleDecrement = (cartProduct) => {
     if (userId) {
       dispatch(decrementQuantity(product));
       dispatch(
         removeFromUserCart({
           productId: product.id,
           userId,
-          quantityRemoved: product.cartQuantity - 1,
-          totalQuantity: product.cartQuantity,
+          quantityRemoved: cartProduct.cartQuantity - 1,
+          totalQuantity: cartProduct.cartQuantity,
         })
       );
     } else {
-      dispatch(decrementQuantity(product));
+      dispatch(decrementQuantity(cartProduct));
     }
   };
-  const handleAdd = (product) => {
+  const handleAdd = (cartProduct, product) => {
+    console.log(cartProduct.cartQuantity);
     if (userId) {
       dispatch(addToCart(product));
-      product.cartQuantity
+      cartProduct.cartQuantity
         ? dispatch(
             addToUserCart({
               productId: product.id,
               userId,
-              totalQuantity: product.cartQuantity,
+              totalQuantity: cartProduct.cartQuantity,
             })
           )
         : dispatch(
@@ -99,14 +115,18 @@ function ProductCard({ product, handleDeleteProduct, isAdmin }) {
               <Col sm="6">
                 <Button
                   sm="6"
-                  onClick={() => handleAdd(product)}
+                  onClick={() =>
+                    handleAdd(getCurrentCartProduct(product), product)
+                  }
                   className="mx-2"
                 >
                   +
                 </Button>
                 <Button
                   sm="6"
-                  onClick={() => handleDecrement(product)}
+                  onClick={() =>
+                    handleDecrement(getCurrentCartProduct(product))
+                  }
                   className="mx-2"
                 >
                   -
@@ -115,7 +135,9 @@ function ProductCard({ product, handleDeleteProduct, isAdmin }) {
             </Form>
             <Button
               variant="danger"
-              onClick={() => handleRemoveFromCart(product)}
+              onClick={() =>
+                handleRemoveFromCart(getCurrentCartProduct(product))
+              }
               className="my-2"
             >
               Remove from cart
@@ -123,7 +145,10 @@ function ProductCard({ product, handleDeleteProduct, isAdmin }) {
           </>
         ) : (
           <Stack direction="horizontal" gap={3}>
-            <Button variant="primary" onClick={() => handleAdd(product)}>
+            <Button
+              variant="primary"
+              onClick={() => handleAdd(getCurrentCartProduct(product), product)}
+            >
               Add To Cart
             </Button>
 

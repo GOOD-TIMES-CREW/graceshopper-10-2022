@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router";
@@ -13,7 +13,7 @@ import CartProduct from "./CartProduct";
 
 function Cart() {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.userCart);
   const { userId } = useParams();
 
   const handleRemoveFromCart = (product) => {
@@ -61,10 +61,14 @@ function Cart() {
     }
   };
 
+  useEffect(() => {
+    dispatch(getAmount());
+  }, [cart]);
+
   return (
     <div>
       {cart.cartProducts.map((product, idx) => (
-        <div>
+        <div key={idx}>
           <CartProduct key={idx} product={product} />
           <Form as={Row}>
             <Form.Label column="true" sm="6">
