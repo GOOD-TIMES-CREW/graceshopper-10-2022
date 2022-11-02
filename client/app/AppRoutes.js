@@ -6,15 +6,17 @@ import Home from "../features/home/Home";
 import AllProducts from "../features/products/AllProducts";
 import SingleProduct from "../features/products/SingleProduct";
 import { me } from "./store";
-import OrderHistory from "../features/user/OrderHistory";
 import Success from "../features/cart/Success";
 import Canceled from "../features/cart/Canceled";
+import Login from "../features/login/Login";
 import Register from "../features/registration/Register";
 import AccountPage from "../features/user/AccountPage";
 import AllUsers from "../features/user/AllUsers";
 import ErrorPage from "../features/error/ErrorPage";
-import Login from "../features/login/Login";
 import AddProduct from "../features/products/AddProduct";
+import AllOrders from "../features/user/AllOrders";
+// import OrderHistory from "../features/user/OrderHistory";
+// import EditUser from "../features/user/EditUser";
 
 /**
  * COMPONENT
@@ -22,6 +24,8 @@ import AddProduct from "../features/products/AddProduct";
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+  const isAdmin = useSelector((state) => state.auth.me.isAdmin);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,22 +36,43 @@ const AppRoutes = () => {
     <div>
       {isLoggedIn ? (
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/*" element={<Home />} />
           <Route to="/home" element={<Home />} />
+          <Route path="/products" element={<AllProducts />} />
+          <Route path="/products/:id" element={<SingleProduct />} />
+          {/* <Route path="/users/:id" element={<AccountPage />} /> */}
+          <Route path="*" element={<ErrorPage />} />
+          {isAdmin && (
+            <>
+              <Route to="/home" element={<Home />} />
+              <Route path="/users" element={<AllUsers />} />
+              <Route path="/orders" element={<AllOrders />} />
+              <Route path="/products/add" element={<AddProduct />} />
+              <Route path="/users/:id" element={<AccountPage />} />
+              <Route path="*" element={<ErrorPage />} />
+            </>
+          )}
         </Routes>
       ) : (
         <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/order_history" element={<OrderHistory />} />
+          //LOCALHOST:8080 DEFAULT PAGE TEMPORARY
+          <Route
+            path="/*"
+            element={<AuthForm name="login" displayName="Login" />}
+          />
+          <Route
+            path="/login"
+            element={<AuthForm name="login" displayName="Login" />}
+          />
+          <Route
+            path="/signup"
+            element={<AuthForm name="signup" displayName="Sign Up" />}
+          />
           <Route path="/products" element={<AllProducts />} />
           <Route path="/products/:id" element={<SingleProduct />} />
-          <Route path="/users" element={<AllUsers />} />
-          <Route path="/users/:id" element={<AccountPage />} />
           <Route path="/success" element={<Success />} />
           <Route path="/canceled" element={<Canceled />} />
           <Route path="*" element={<ErrorPage />} />
-          <Route path="/products/add" element={<AddProduct />} />
         </Routes>
       )}
     </div>

@@ -2,36 +2,35 @@
 const { faker } = require("@faker-js/faker");
 const {
   db,
-  models: { User, Product, Order, Order_Product },
+  models: { User, Product, Order },
 } = require("../server/db");
 
-// DUMMY USER DATA
 const customers = [
   {
     firstName: "Harry",
     lastName: "Potter",
-    email: "harry.potter@wizardingworld.co.uk",
+    username: "harry.potter@wizardingworld.co.uk",
     password: "fuckvoldemort",
     isAdmin: false,
   },
   {
     firstName: "Hermione",
     lastName: "Granger",
-    email: "hermione.granger@wizardingworld.co.uk",
+    username: "hermione.granger@wizardingworld.co.uk",
     password: "fuckvoldemort",
     isAdmin: true,
   },
   {
     firstName: "Draco",
     lastName: "Malfoy",
-    email: "draco.malfoy@wizardingworld.co.uk",
+    username: "draco.malfoy@wizardingworld.co.uk",
     password: "fuckharry",
     isAdmin: false,
   },
   {
     firstName: "Severus",
     lastName: "Snape",
-    email: "severus.snape@wizardingworld.co.uk",
+    username: "severus.snape@wizardingworld.co.uk",
     password: "iluvlily",
     isAdmin: true,
   },
@@ -673,8 +672,6 @@ const products = [
   },
 ];
 
-//test
-
 const orders = [
   {
     status: "unfulfilled",
@@ -706,20 +703,9 @@ const customerGenerator = () => {
   return {
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
-    email: faker.internet.email(),
+    username: faker.internet.email(),
     password: faker.internet.password(),
     isAdmin: false,
-  };
-};
-
-const productGenerator = () => {
-  return {
-    name: faker.commerce.productName(),
-    imageUrl: faker.image.avatar(),
-    description: faker.commerce.productDescription(),
-    price: faker.commerce.price(),
-    genre: faker.commerce.productAdjective(),
-    inventory: 100,
   };
 };
 
@@ -727,29 +713,22 @@ Array.from({ length: 11 }).forEach(() => {
   customers.push(customerGenerator());
 });
 
-// Array.from({ length: 50 }).forEach(() => {
-//   products.push(productGenerator());
-// });
-
 async function seed() {
-  await db.sync({ force: true }); // clears db and matches models to tables
+  await db.sync({ force: true });
   console.log("db synced!");
 
-  // Creating Users
   const users = await Promise.all(
     customers.map((user) => {
       return User.create(user);
     })
   );
 
-  // Creating Products
   const product = await Promise.all(
     products.map((product) => {
       return Product.create(product);
     })
   );
 
-  // Creating Orders
   const order = await Promise.all(
     orders.map((order) => {
       return Order.create(order);
@@ -759,7 +738,6 @@ async function seed() {
   console.log(`seeded ${users.length} users`);
   console.log(`seeded ${product.length} products`);
   console.log(`seeded ${order.length} orders`);
-  console.log(`seeded successfully`);
 }
 
 /*
@@ -775,7 +753,6 @@ async function runSeed() {
     console.error(err);
     process.exitCode = 1;
   } finally {
-    console.log("closing db connection");
     await db.close();
     console.log("db connection closed");
   }

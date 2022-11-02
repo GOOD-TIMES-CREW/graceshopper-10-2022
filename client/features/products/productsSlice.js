@@ -4,34 +4,37 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchAllProducts = createAsyncThunk(
   "fetchAllProducts",
   async () => {
-    try {
-      const { data } = await axios.get("/api/products");
-      return data;
-    } catch (error) {
-      console.error(error.message);
-    }
+    const { data } = await axios.get("/api/products");
+    return data;
   }
 );
 
 export const fetchSingleProduct = createAsyncThunk(
   "fetchSingleProduct",
   async (id) => {
-    try {
-      const { data } = await axios.get(`/api/products/${id}`);
-      return data;
-    } catch (error) {
-      console.error(error.message);
-    }
+    const { data } = await axios.get(`/api/products/${id}`);
+    return data;
   }
 );
 
 export const addProduct = createAsyncThunk("addProduct", async (newProduct) => {
-  const { data } = await axios.post("/api/products", newProduct);
+  const token = window.localStorage.getItem("token");
+  //I'm not sure what order to send the token or new product. Can't test until login works
+  const { data } = await axios.post("/api/products", newProduct, {
+    headers: {
+      authorization: token,
+    },
+  });
   return data;
 });
 
 export const deleteProduct = createAsyncThunk("deleteProduct", async (id) => {
-  const { data } = await axios.delete(`/api/products/${id}`);
+  const token = window.localStorage.getItem("token");
+  const { data } = await axios.delete(`/api/products/${id}`, {
+    headers: {
+      authorization: token,
+    },
+  });
   return data;
 });
 

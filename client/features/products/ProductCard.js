@@ -1,12 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  Card,
-  Button,
-  Form,
-  Row,
-  Col,
-  Stack,
-} from "react-bootstrap";
+import { Card, Button, Form, Row, Col, Stack } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import {
   addToCart,
@@ -20,6 +13,7 @@ function ProductCard({ product, handleDeleteProduct }) {
   const Navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const isAdmin = useSelector((state) => state.auth.me.isAdmin);
   const getCurrentProductQuantity = (product) => {
     for (let i = 0; i < cart.cartProducts.length; i++) {
       if (product.name === cart.cartProducts[i].name)
@@ -89,12 +83,14 @@ function ProductCard({ product, handleDeleteProduct }) {
               Add To Cart
             </Button>
             <div className="vr" />
-            <Button
-              variant="danger"
-              onClick={() => handleDeleteProduct(product.id)}
-            >
-              Delete Product
-            </Button>
+            {isAdmin && (
+              <Button
+                variant="danger"
+                onClick={() => handleDeleteProduct(product.id)}
+              >
+                Delete Product
+              </Button>
+            )}
           </Stack>
         )}
       </Card.Body>
