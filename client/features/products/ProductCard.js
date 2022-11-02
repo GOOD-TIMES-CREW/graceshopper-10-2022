@@ -9,7 +9,7 @@ import {
 } from "../cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-function ProductCard({ product, handleDeleteProduct }) {
+function ProductCard({ product, handleDeleteProduct, isAdmin }) {
   const Navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
@@ -82,14 +82,17 @@ function ProductCard({ product, handleDeleteProduct }) {
             <Button variant="primary" onClick={() => handleAdd(product)}>
               Add To Cart
             </Button>
-            <div className="vr" />
+
             {isAdmin && (
-              <Button
-                variant="danger"
-                onClick={() => handleDeleteProduct(product.id)}
-              >
-                Delete Product
-              </Button>
+              <>
+                <div className="vr" />
+                <Button
+                  variant="danger"
+                  onClick={() => handleDeleteProduct(product.id)}
+                >
+                  Delete Product
+                </Button>
+              </>
             )}
           </Stack>
         )}

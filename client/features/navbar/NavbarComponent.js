@@ -4,11 +4,19 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../../app/store";
 import { Button, Container, Navbar, Nav, Modal } from "react-bootstrap";
 import CartProduct from "../cart/CartProduct";
+import { me } from "../auth/authSlice";
 import { getAmount } from "../cart/cartSlice";
 
 function NavbarComponent() {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
-  const isAdmin = useSelector((state) => state.auth.me.isAdmin);
+
+  // Once authentication is fixed comment this line back in and delete hardcoded line
+  // const isAdmin = useSelector((state) => state.auth.me.isAdmin);
+  const isAdmin = false;
+
+  useEffect(() => {
+    dispatch(me());
+  }, []);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -81,6 +89,16 @@ function NavbarComponent() {
                 <Nav.Link href="/login">Login</Nav.Link>
                 <Nav.Link href="/signup">Sign Up</Nav.Link>
                 <Nav.Link href="/products">All Products</Nav.Link>
+                {/*Temporary, will switch this to only show up when admin is logged in later*/}
+                {isAdmin && (
+                  <>
+                    {" "}
+                    <Nav.Link href="/users">All Users</Nav.Link>{" "}
+                    <Nav.Link href="/allorders">All Orders</Nav.Link>{" "}
+                  </>
+                )}
+
+                <Nav.Link href="/order_history">Order History</Nav.Link>
               </Nav>
               <Navbar.Toggle />
               <Navbar.Collapse className="justify-content-end">

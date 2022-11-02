@@ -15,14 +15,17 @@ import AllUsers from "../features/user/AllUsers";
 import ErrorPage from "../features/error/ErrorPage";
 import AddProduct from "../features/products/AddProduct";
 import AllOrders from "../features/user/AllOrders";
-// import OrderHistory from "../features/user/OrderHistory";
-// import EditUser from "../features/user/EditUser";
+
 
 /**
  * COMPONENT
  */
 
 const AppRoutes = () => {
+  // Once authentication is fixed comment this line back in and delete hardcoded line
+  // const isAdmin = useSelector((state) => state.auth.me.isAdmin);
+  const isAdmin = false;
+
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const isAdmin = useSelector((state) => state.auth.me.isAdmin);
 
@@ -70,9 +73,19 @@ const AppRoutes = () => {
           />
           <Route path="/products" element={<AllProducts />} />
           <Route path="/products/:id" element={<SingleProduct />} />
+
+          <Route path="/users/:id" element={<AccountPage />} />
           <Route path="/success" element={<Success />} />
           <Route path="/canceled" element={<Canceled />} />
           <Route path="*" element={<ErrorPage />} />
+
+          {isAdmin && (
+            <>
+              <Route path="/users" element={<AllUsers />} />
+              <Route path="/allorders" element={<AllOrders />} />
+              <Route path="/products/add" element={<AddProduct />} />
+            </>
+          )}
         </Routes>
       )}
     </div>

@@ -17,7 +17,11 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const singleOrder = await Order.findByPk(req.params.id);
-    res.json(singleOrder);
+    if (singleOrder) {
+      res.json(singleOrder);
+    } else {
+      res.sendStatus(404);
+    }
   } catch (error) {
     next(error);
   }

@@ -6,15 +6,23 @@ import ProductCard from "./ProductCard";
 import { deleteProduct } from "./productsSlice";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import { me } from "../auth/authSlice";
+
 // import Sidebar from "../sidebar/Sidebar";
 
 function AllProducts() {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products.products);
-  const isAdmin = useSelector((state) => state.auth.me.isAdmin);
+  const products = useSelector((state) => state.products.products)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10);
+  const isAdmin = false;
+  // Once authentication is fixed comment this line back in and delete hardcoded line above
+  // const isAdmin = useSelector((state) => state.auth.me.isAdmin)
+
 
   useEffect(() => {
     dispatch(fetchAllProducts());
+    dispatch(me());
   }, [dispatch]);
 
   const handleDeleteProduct = (id) => {
@@ -39,6 +47,7 @@ function AllProducts() {
             <ProductCard
               product={product}
               handleDeleteProduct={handleDeleteProduct}
+              isAdmin={isAdmin}
             />
           </Col>
         ))}

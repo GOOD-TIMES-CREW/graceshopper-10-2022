@@ -6,9 +6,20 @@ const {
 // GET  /api/users
 router.get("/", async (req, res, next) => {
   try {
-    const users = await User.findAll({});
-    res.json(users);
-    // }
+
+    const loggedInUser = await User.findByToken(req.headers.authorization);
+    if (loggedInUser.isAdmin) {
+      const users = await User.findAll({
+        // explicitly select only the id and username fields - even though
+        // users' passwords are encrypted, it won't help if we just
+        // send everything to anyone who asks!
+        // attributes: ["id", "username"],
+      });
+      res.json(users);
+    } else {
+      res.sendStatus(401);
+    }
+
   } catch (err) {
     next(err);
   }
@@ -28,7 +39,11 @@ router.post("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
-    res.json(user);
+    if (user) {
+      res.json(user);
+    } else {
+      res.sendStatus(404);
+    }
   } catch (error) {
     next(error);
   }
@@ -38,8 +53,12 @@ router.get("/:id", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
-    await user.destroy();
-    res.send(user);
+    if (user) {
+      await user.destroy();
+      res.send(user);
+    } else {
+      res.sendStatus(404);
+    }
   } catch (error) {
     next(error);
   }
@@ -49,7 +68,11 @@ router.delete("/:id", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
-    res.json(await user.update(req.body));
+    if (user) {
+      res.json(await user.update(req.body));
+    } else {
+      res.sendStatus(404);
+    }
   } catch (err) {
     next(err);
   }
