@@ -1,24 +1,19 @@
 import React, { useEffect } from "react";
-import {
-  Card,
-  Button,
-  Form,
-  Row,
-  Col,
-  Stack,
-} from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Card, Button, Form, Row, Col, Stack } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   addToCart,
   decrementQuantity,
   getAmount,
   removeFromCart,
 } from "../cart/cartSlice";
+import { addToUserCart } from "../cart/userCartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function ProductCard({ product, handleDeleteProduct, isAdmin }) {
   const Navigate = useNavigate();
   const dispatch = useDispatch();
+  const userId = 1;
   const cart = useSelector((state) => state.cart);
   const getCurrentProductQuantity = (product) => {
     for (let i = 0; i < cart.cartProducts.length; i++) {
@@ -34,8 +29,13 @@ function ProductCard({ product, handleDeleteProduct, isAdmin }) {
   const handleDecrement = (cartProduct) => {
     dispatch(decrementQuantity(cartProduct));
   };
-  const handleAdd = (cartProduct) => {
-    dispatch(addToCart(cartProduct));
+  const handleAdd = (product) => {
+    if (userId) {
+      dispatch(addToCart(product));
+      dispatch(addToUserCart({ productId: product.id, userId }));
+    } else {
+      dispatch(addToCart(cartProduct));
+    }
   };
 
   useEffect(() => {
