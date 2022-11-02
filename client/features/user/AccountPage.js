@@ -16,11 +16,9 @@ function AccountPage() {
 
   return (
     <div className="single-user">
-      <h1>
-        Hi, {firstName} {lastName}!
-      </h1>
+      <h1>{/* Hi, {firstName} {lastName}! */}</h1>
       <EditUser />
-      {/* <OrderHistory /> */}
+      <OrderHistory />
     </div>
   );
 }

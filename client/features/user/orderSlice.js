@@ -2,35 +2,23 @@ import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchAllOrders = createAsyncThunk("fetchAllOrders", async () => {
-  try {
-    const { data } = await axios.get("/api/orders");
-    return data;
-  } catch (error) {
-    console.error(error.message);
-  }
+  const { data } = await axios.get("/api/orders");
+  return data;
 });
 
 export const fetchSingleOrder = createAsyncThunk(
   "fetchSingleOrder",
   async (id) => {
-    try {
-      const { data } = await axios.get(`/api/orders/${id}`);
-      return data;
-    } catch (error) {
-      console.error(error.message);
-    }
+    const { data } = await axios.get(`/api/orders/${id}`);
+    return data;
   }
 );
 
 export const fetchUserOrderHistory = createAsyncThunk(
   "fetchUserOrderHistory",
   async (id) => {
-    try {
-      const { data } = await axios.get(`/api/orders/user/${id}`);
-      return data;
-    } catch (error) {
-      console.error(error.message);
-    }
+    const { data } = await axios.get(`/api/orders/user/${id}`);
+    return data;
   }
 );
 

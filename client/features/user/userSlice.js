@@ -2,12 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchUsers = createAsyncThunk("fetchUsers", async () => {
-  const token = window.localStorage.getItem("token");
-  const { data } = await axios.get("/api/users", {
-    headers: {
-      authorization: token,
-    },
-  });
+  // const token = window.localStorage.getItem("token");
+  // , {
+  //   headers: {
+  //     authorization: token,
+  //   },
+  const { data } = await axios.get("/api/users");
   return data;
 });
 
@@ -40,16 +40,12 @@ export const deleteUser = createAsyncThunk("deleteUser", async (userId) => {
 export const editUser = createAsyncThunk(
   "editUser",
   async ({ id, firstName, lastName, username }) => {
-    try {
-      const { data } = await axios.put(`/api/users/${id}`, {
-        firstName,
-        lastName,
-        username,
-      });
-      return data;
-    } catch (err) {
-      console.error(err);
-    }
+    const { data } = await axios.put(`/api/users/${id}`, {
+      firstName,
+      lastName,
+      username,
+    });
+    return data;
   }
 );
 
