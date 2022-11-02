@@ -17,7 +17,11 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.id);
-    res.json(product);
+    if (product) {
+      res.json(product);
+    } else {
+      res.sendStatus(404);
+    }
   } catch (error) {
     next(error);
   }
@@ -29,7 +33,11 @@ router.post("/", async (req, res, next) => {
     const loggedInUser = await User.findByToken(req.headers.authorization);
     if (loggedInUser.isAdmin) {
       const product = await Product.create(req.body);
-      res.json(product);
+      if (product) {
+        res.json(product);
+      } else {
+        res.sendStatus(404);
+      }
     } else {
       res.sendStatus(401);
     }
