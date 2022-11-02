@@ -1,5 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import Banner from "../banner/Banner";
+import FeaturedProducts from "../products/FeaturedProducts";
 
 /**
  * COMPONENT
@@ -26,6 +28,8 @@ const Home = () => {
           <h3>
             Welcome, {firstName} {lastName}
           </h3>
+          <Banner />
+          <FeaturedProducts />
         </div>
       )}
     </div>
