@@ -84,10 +84,7 @@ function NavbarComponent() {
                 <>
                   <p>Items in your cart:</p>
                   {cart.cartProducts.map((currentProduct, idx) => (
-                    <CartProduct
-                      key={idx}
-                      product={currentProduct}
-                    ></CartProduct>
+                    <CartProduct key={idx} product={currentProduct} />
                   ))}
 
                   <h1>Total: ${cart.cartTotalPrice}</h1>

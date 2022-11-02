@@ -7,7 +7,7 @@ import {
   getAmount,
   removeFromCart,
 } from "../cart/cartSlice";
-import { addToUserCart } from "../cart/userCartSlice";
+import { addToUserCart, removeFromUserCart } from "../cart/userCartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function ProductCard({ product, handleDeleteProduct, isAdmin }) {
@@ -23,18 +23,56 @@ function ProductCard({ product, handleDeleteProduct, isAdmin }) {
     return 0;
   };
 
-  const handleRemoveFromCart = (cartProduct) => {
-    dispatch(removeFromCart(cartProduct));
+  const handleRemoveFromCart = (product) => {
+    if (userId) {
+      dispatch(removeFromCart(product));
+      dispatch(
+        removeFromUserCart({
+          productId: product.id,
+          userId,
+          quantityRemoved: product.cartQuantity,
+          totalQuantity: product.cartQuantity,
+        })
+      );
+    } else {
+      dispatch(removeFromCart(product));
+    }
   };
-  const handleDecrement = (cartProduct) => {
-    dispatch(decrementQuantity(cartProduct));
+  const handleDecrement = (product) => {
+    if (userId) {
+      dispatch(decrementQuantity(product));
+      dispatch(
+        removeFromUserCart({
+          productId: product.id,
+          userId,
+          quantityRemoved: product.cartQuantity - 1,
+          totalQuantity: product.cartQuantity,
+        })
+      );
+    } else {
+      dispatch(decrementQuantity(product));
+    }
   };
   const handleAdd = (product) => {
     if (userId) {
       dispatch(addToCart(product));
-      dispatch(addToUserCart({ productId: product.id, userId }));
+      product.cartQuantity
+        ? dispatch(
+            addToUserCart({
+              productId: product.id,
+              userId,
+              totalQuantity: product.cartQuantity,
+            })
+          )
+        : dispatch(
+            addToUserCart({
+              productId: product.id,
+              userId,
+              totalQuantity: 0,
+            })
+          );
     } else {
-      dispatch(addToCart(cartProduct));
+      dispatch(addToCart(product));
     }
   };
 

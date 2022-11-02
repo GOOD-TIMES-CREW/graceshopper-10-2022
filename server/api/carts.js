@@ -8,12 +8,15 @@ const Order_Product = require("../db/models/Order_Product");
 router.get("/:id/cart", async (req, res, next) => {
   try {
     // console.log(req.params.id);
-    const cart = await Order.findOrCreate({
+    const [order] = await Order.findOrCreate({
       where: {
         userId: req.params.id,
       },
+      defaults: {
+        userId: req.params.id,
+      },
     });
-    res.json(cart);
+    res.json(order);
   } catch (err) {
     next(err);
   }
@@ -22,13 +25,13 @@ router.get("/:id/cart", async (req, res, next) => {
 // POST /users/:id/cart
 router.post("/:id/cart", async (req, res, next) => {
   try {
-    const cart = await Order.create({
+    const [order] = await Order.create({
       where: {
         userId: req.params.id,
       },
     });
 
-    res.status(201).json(cart);
+    res.status(201).json(order);
   } catch (err) {
     next(err);
   }
@@ -42,12 +45,49 @@ router.put("/:id/cart", async (req, res, next) => {
         userId: req.params.id,
       },
     });
-    console.log("req.body: ", req.body);
-    const orderProduct = await Order_Product.create({
-      orderId: order.id,
-      productId: req.body.productId,
+    const orderProduct = await Order_Product.findOrCreate({
+      where: {
+        orderId: order.id,
+        productId: req.body.productId,
+      },
+      defaults: {
+        orderId: order.id,
+        productId: req.body.productId,
+      },
     });
+    if (orderProduct.quantity >= 1) {
+      orderProduct.update({
+        quantity: req.body.totalQuantity++,
+      });
+    }
     res.json(orderProduct);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// DELETE /users/:id/cart
+router.delete("/:id/cart", async (req, res, next) => {
+  try {
+    const [order] = await Order.findOne({
+      where: {
+        userId: req.params.id,
+      },
+    });
+    const orderProduct = findOne({
+      where: {
+        orderId: order.id,
+        productId: req.body.productId,
+      },
+    });
+    if (req.body.quantityRemoved < req.body.totalQuantity) {
+      orderProduct.update({
+        quantity: req.body.totalQuantity - req.body.quantityRemoved,
+      });
+    } else {
+      await orderProduct.destroy();
+    }
+    res.send(orderProduct);
   } catch (err) {
     next(err);
   }
