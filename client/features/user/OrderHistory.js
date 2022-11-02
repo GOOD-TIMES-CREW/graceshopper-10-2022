@@ -20,7 +20,6 @@ const OrderHistory = () => {
         {orderHistory.map((order) => (
           <div key={order.id}>
             <div>Order ID: {order.id}</div>
-
             <div>Order Status: {order.status}</div>
             <div>Order Date: {order.dateOrdered}</div>
             <div>Order Number: {order.confirmationNumber}</div>

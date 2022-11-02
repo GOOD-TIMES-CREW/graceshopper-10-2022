@@ -8,7 +8,7 @@ import EditUser from "./EditUser";
 function AccountPage() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const user = useSelector((state) => state.users.user);
+  const { firstName, lastName } = useSelector((state) => state.users.user);
 
   useEffect(() => {
     dispatch(fetchSingleUser(id));
@@ -17,11 +17,10 @@ function AccountPage() {
   return (
     <div className="single-user">
       <h1>
-        Hi, {user.firstName} {user.lastName}!
+        Hi, {firstName} {lastName}!
       </h1>
-      <p>Email: {user.email}</p>
       <EditUser />
-      <OrderHistory />
+      {/* <OrderHistory /> */}
     </div>
   );
 }

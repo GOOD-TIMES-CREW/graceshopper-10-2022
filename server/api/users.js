@@ -6,6 +6,7 @@ const {
 // GET  /api/users
 router.get("/", async (req, res, next) => {
   try {
+
     const loggedInUser = await User.findByToken(req.headers.authorization);
     if (loggedInUser.isAdmin) {
       const users = await User.findAll({
@@ -18,6 +19,7 @@ router.get("/", async (req, res, next) => {
     } else {
       res.sendStatus(401);
     }
+
   } catch (err) {
     next(err);
   }

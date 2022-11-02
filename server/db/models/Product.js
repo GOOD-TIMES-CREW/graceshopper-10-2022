@@ -23,7 +23,6 @@ const Product = db.define("product", {
   },
   system: {
     type: Sequelize.STRING,
-    allowNull: false,
   },
   inventory: {
     type: Sequelize.INTEGER,

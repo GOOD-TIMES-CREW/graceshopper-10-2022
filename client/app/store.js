@@ -6,7 +6,6 @@ import userSliceReducer from "../features/user/userSlice";
 import orderSliceReducer from "../features/user/orderSlice";
 import cartSliceReducer from "../features/cart/cartSlice";
 
-
 const store = configureStore({
   reducer: {
     auth: authReducer,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllProducts } from "./productsSlice";
@@ -7,16 +7,18 @@ import { deleteProduct } from "./productsSlice";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { me } from "../auth/authSlice";
+
 // import Sidebar from "../sidebar/Sidebar";
 
 function AllProducts() {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products.products);
+  const products = useSelector((state) => state.products.products)
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
   const isAdmin = false;
   // Once authentication is fixed comment this line back in and delete hardcoded line above
   // const isAdmin = useSelector((state) => state.auth.me.isAdmin)
+
 
   useEffect(() => {
     dispatch(fetchAllProducts());

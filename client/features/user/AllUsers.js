@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers } from "./userSlice";
 import { Link } from "react-router-dom";
-import AccountPage from "./AccountPage";
 
 function AllUsers() {
   const dispatch = useDispatch();
@@ -15,7 +14,7 @@ function AllUsers() {
     <div className="all-users">
       <h1>All Users</h1>
       {users?.map((user) => (
-        <div className="user-container">
+        <div key={user.id} className="user-container">
           <h3>
             <Link to={`/users/${user.id}`}>
               {user.firstName} {user.lastName}

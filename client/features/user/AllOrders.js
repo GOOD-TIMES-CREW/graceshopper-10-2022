@@ -18,7 +18,6 @@ function AllOrders() {
           <h3>
             <Link to={`/orders/${order.id}`}>{order.confirmationNumber}</Link>
           </h3>
-
           <p> Date Ordered: {order.dateOrdered}</p>
           <p>Status: {order.status}</p>
           <p>Shipping Address: {order.shipping_address}</p>

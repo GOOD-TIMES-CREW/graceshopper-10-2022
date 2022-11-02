@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-//import axios from 'axios';
+import axios from "axios";
 
 /*
   CONSTANT VARIABLES
@@ -33,9 +33,18 @@ export const me = createAsyncThunk("auth/me", async () => {
 
 export const authenticate = createAsyncThunk(
   "auth/authenticate",
-  async ({ username, password, method }, thunkAPI) => {
+  async (
+    { firstName, lastName, username, password, isAdmin, method },
+    thunkAPI
+  ) => {
     try {
-      const res = await axios.post(`/auth/${method}`, { username, password });
+      const res = await axios.post(`/auth/${method}`, {
+        firstName,
+        lastName,
+        username,
+        password,
+        isAdmin,
+      });
       window.localStorage.setItem(TOKEN, res.data.token);
       thunkAPI.dispatch(me());
     } catch (err) {
@@ -58,7 +67,7 @@ export const authSlice = createSlice({
     error: null,
   },
   reducers: {
-    logout(state, action) {
+    logout(state) {
       window.localStorage.removeItem(TOKEN);
       state.me = {};
       state.error = null;
@@ -73,6 +82,7 @@ export const authSlice = createSlice({
     });
     builder.addCase(authenticate.rejected, (state, action) => {
       state.error = action.payload;
+      window.alert(action.payload);
     });
   },
 });
