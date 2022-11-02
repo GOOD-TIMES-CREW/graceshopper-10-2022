@@ -6,7 +6,7 @@ import ProductCard from "./ProductCard";
 import { deleteProduct } from "./productsSlice";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import Sidebar from "../sidebar/Sidebar";
+// import Sidebar from "..//Sidebar";
 
 function AllProducts() {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ function AllProducts() {
       <Link to="/products/add">
         <Button variant="primary">Add Product Form</Button>
       </Link>
-      <Sidebar />
+      {/* <Sidebar /> */}
       <Row xs={1} md={3} className="g-4">
         {products?.map((product) => (
           <Col align="center" key={product.id}>

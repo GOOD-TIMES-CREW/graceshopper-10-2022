@@ -11,15 +11,11 @@ export const addToUserCart = createAsyncThunk(
   "cart/add",
   async ({ product, userId }) => {
     try {
-      const cart = (await axios) / get(`api/users/${userId}/cart`);
+      const cart = await axios.get(`api/users/${userId}/cart`);
       if (cart.data) {
-        const { data } = await axios.put(
-          `api/users/${userId}/cart`,
-          product.id
-        );
+        const { data } = await axios.put(`api/users/${userId}/cart`, product);
+        return data;
       }
-
-      return data;
     } catch (err) {
       console.error(err.message);
     }

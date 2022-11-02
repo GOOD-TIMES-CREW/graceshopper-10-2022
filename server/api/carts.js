@@ -6,13 +6,12 @@ const User = require("../db/models/User");
 // GET /api/users/:id/cart
 router.get("/:id/cart", async (req, res, next) => {
   try {
-    const cart = await Cart.findByPk(req.params.id);
-    if (!cart) {
-      const newCart = await Cart.create({ userId: req.params.id });
-      return res.status(202).json(newCart);
-    } else {
-      res.json(cart);
-    }
+    const cart = await Cart.findOrCreate({
+      where: {
+        userId: req.params.id,
+      },
+    });
+    res.json(cart);
   } catch (err) {
     next(err);
   }
@@ -21,9 +20,13 @@ router.get("/:id/cart", async (req, res, next) => {
 // POST /users/:id/cart
 router.post("/:id/cart", async (req, res, next) => {
   try {
-    console.log(req.body);
-    const { userId } = req.body;
-    res.status(201).json(await Cart.create({ where: { userId: userId } }));
+    const cart = await Cart.create({
+      where: {
+        userId: req.params.id,
+      },
+    });
+
+    res.status(201).json(cart);
   } catch (err) {
     next(err);
   }
@@ -32,8 +35,13 @@ router.post("/:id/cart", async (req, res, next) => {
 // PUT /users/:id/cart
 router.put("/:id/cart", async (req, res, next) => {
   try {
-    const cart = Cart.findByPk(req.params.id);
-    res.json(await cart.update(req.body));
+    const cart = await Cart.findOrCreate({
+      where: {
+        userId: req.params.id,
+      },
+    });
+    cart.setProduct(req.body);
+    res.json(cart);
   } catch (err) {
     next(err);
   }
