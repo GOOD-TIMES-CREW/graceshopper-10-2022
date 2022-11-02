@@ -15,14 +15,36 @@ const AuthForm = ({ name, displayName }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const formName = evt.target.name;
+    const firstName = evt.target.firstName.value;
+    const lastName = evt.target.lastName.value;
     const username = evt.target.username.value;
     const password = evt.target.password.value;
-    dispatch(authenticate({ username, password, method: formName }));
+    dispatch(
+      authenticate({
+        firstName,
+        lastName,
+        username,
+        password,
+        method: formName,
+      })
+    );
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit} name={name}>
+        <div>
+          <label htmlFor="firstName">
+            <small>First Name:</small>
+          </label>
+          <input name="firstName" type="text" />
+        </div>
+        <div>
+          <label htmlFor="lastName">
+            <small>Last Name:</small>
+          </label>
+          <input name="lastName" type="text" />
+        </div>
         <div>
           <label htmlFor="username">
             <small>Username</small>
@@ -38,7 +60,7 @@ const AuthForm = ({ name, displayName }) => {
         <div>
           <button type="submit">{displayName}</button>
         </div>
-        {error && <div> {error} </div>}
+        {/* {error && <div> {error} </div>} */}
       </form>
     </div>
   );

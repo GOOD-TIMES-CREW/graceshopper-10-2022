@@ -10,36 +10,34 @@ function EditUser() {
 
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
-  const [email, setEmail] = useState(user.email);
-
-  console.log(user.email);
+  const [username, setUsername] = useState(user.username);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    dispatch(editUser({ id, firstName, lastName, email }));
+    dispatch(editUser({ id, firstName, lastName, username }));
   };
   return (
     <form onSubmit={handleSubmit}>
       <label>
         <h4>Edit User Info</h4>
       </label>
-      <p>First Name: </p>
+      <p>First Name: {user.firstName}</p>
       <input
         name="firstName"
         value={firstName}
         onChange={(e) => setFirstName(e.target.value)}
       />
-      <p>Last Name: </p>
+      <p>Last Name: {user.lastName}</p>
       <input
         name="lastName"
         value={lastName}
         onChange={(e) => setLastName(e.target.value)}
       />
-      <p>Email: </p>
+      <p>Email: {user.username}</p>
       <input
-        name="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        name="username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
       />
       <br />
       <br />

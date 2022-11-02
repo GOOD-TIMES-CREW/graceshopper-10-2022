@@ -1,37 +1,31 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = [];
-
 export const fetchUsers = createAsyncThunk("fetchUsers", async () => {
-  const token = window.localStorage.getItem("token");
-  const { data } = await axios.get("/api/users", {
-    headers: {
-      authorization: token,
-    },
-  });
+  // const token = window.localStorage.getItem("token");
+  // , {
+  //   headers: {
+  //     authorization: token,
+  //   },
+  const { data } = await axios.get("/api/users");
   return data;
 });
 
 export const fetchSingleUser = createAsyncThunk(
   "fetchSingleUser",
   async (id) => {
-    try {
-      const { data } = await axios.get(`/api/users/${id}`);
-      return data;
-    } catch (error) {
-      console.error(error.message);
-    }
+    const { data } = await axios.get(`/api/users/${id}`);
+    return data;
   }
 );
 
 export const createUser = createAsyncThunk(
   "createUser",
-  async ({ firstName, lastName, email, password }) => {
+  async ({ firstName, lastName, username, password }) => {
     const { data } = await axios.post("/api/users", {
       firstName,
       lastName,
-      email,
+      username,
       password,
     });
     return data;
@@ -45,17 +39,13 @@ export const deleteUser = createAsyncThunk("deleteUser", async (userId) => {
 
 export const editUser = createAsyncThunk(
   "editUser",
-  async ({ id, firstName, lastName, email }) => {
-    try {
-      const { data } = await axios.put(`/api/users/${id}`, {
-        firstName,
-        lastName,
-        email,
-      });
-      return data;
-    } catch (err) {
-      console.error(err);
-    }
+  async ({ id, firstName, lastName, username }) => {
+    const { data } = await axios.put(`/api/users/${id}`, {
+      firstName,
+      lastName,
+      username,
+    });
+    return data;
   }
 );
 
@@ -80,8 +70,7 @@ export const usersSlice = createSlice({
       state.push(action.payload);
     }),
       builder.addCase(deleteUser.fulfilled, (state, action) => {
-        const newUser = state.filter((user) => user.id !== action.payload.id);
-        return newUser;
+        state.filter((user) => user.id !== action.payload.id);
       });
   },
 });

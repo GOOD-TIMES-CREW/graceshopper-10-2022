@@ -10,12 +10,13 @@ import {
 import { addToUserCart, removeFromUserCart } from "../cart/userCartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-function ProductCard({ product, handleDeleteProduct, isAdmin }) {
+function ProductCard({ product, handleDeleteProduct }) {
   const Navigate = useNavigate();
   const dispatch = useDispatch();
   const userId = 1;
   const cart = useSelector((state) => state.cart);
   const userCart = useSelector((state) => state.userCart);
+
   const getCurrentProductQuantity = (product) => {
     for (let i = 0; i < cart.cartProducts.length; i++) {
       if (product.name === cart.cartProducts[i].name)

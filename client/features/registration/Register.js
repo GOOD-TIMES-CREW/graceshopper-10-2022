@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-// import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { createUser } from "../user/userSlice";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { MDBCheckbox, MDBBtn, MDBIcon } from "mdb-react-ui-kit";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
@@ -18,8 +17,18 @@ const validation = yup.object().shape({
 });
 
 function Register() {
+  const dispatch = useDispatch();
   const onSubmit = (values, actions) => {
     actions.resetForm();
+    // console.log('values', values)
+    dispatch(
+      createUser(
+        values.firstName,
+        values.lastName,
+        values.email,
+        values.password
+      )
+    );
   };
 
   const { values, errors, touched, handleSubmit, handleChange } = useFormik({
@@ -79,6 +88,7 @@ function Register() {
       <p id="font-validation">Password </p>
       <Form.Control
         name="password"
+        type="password"
         placeholder="Enter password.."
         value={values.password}
         onChange={handleChange}
@@ -87,11 +97,13 @@ function Register() {
         <p className="font-validation">{errors.password}</p>
       )}
 
-      <MDBCheckbox
-        name="flexCheck"
+      <Form.Check
+        name="termsCheckbox"
+        type="checkbox"
         value={values.termsCheckbox}
-        id="flexCheckDefault"
         label="I agree to the terms of service."
+        checked={values.termsCheckbox}
+        onChange={handleChange}
       />
       {errors.termsCheckbox && touched.termsCheckbox && (
         <p className="font-validation">{errors.termsCheckbox}</p>

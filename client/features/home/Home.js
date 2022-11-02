@@ -1,15 +1,37 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import Banner from "../banner/Banner";
+import FeaturedProducts from "../products/FeaturedProducts";
 
 /**
  * COMPONENT
  */
-const Home = (props) => {
-  const username = useSelector((state) => state.auth.me.username);
+const Home = () => {
+  const { firstName, lastName, isAdmin } = useSelector(
+    (state) => state.auth.me
+  );
 
   return (
     <div>
-      <h3>Welcome, {username}</h3>
+      {isAdmin ? (
+        <div>
+          <h3>
+            Welcome, {firstName} {lastName}
+          </h3>
+          <h4 style={{ color: "blue" }}>
+            You are an Administrator, with great power comes great
+            responsibility! 😉
+          </h4>
+        </div>
+      ) : (
+        <div>
+          <h3>
+            Welcome, {firstName} {lastName}
+          </h3>
+          <Banner />
+          <FeaturedProducts />
+        </div>
+      )}
     </div>
   );
 };
