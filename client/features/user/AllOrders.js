@@ -14,12 +14,12 @@ function AllOrders() {
     <div className="all-orders">
       <h1>All Orders</h1>
       {orders?.map((order) => (
-        <div className="orders-container">
+        <div key={order.id} className="orders-container">
           <h3>
             {/* <Link to={`/orders/${order.id}`}>{order.confirmationNumber}</Link> */}
             {order.confirmationNumber}
           </h3>
-          <p> Date Ordered: {order.dateOrdered}</p>
+          <p>Date Ordered: {order.dateOrdered}</p>
           <p>Status: {order.status}</p>
           <p>Shipping Address: {order.shipping_address}</p>
           <p>Shipped: {order.shipped}</p>
