@@ -7,8 +7,8 @@ const OrderHistory = () => {
   const dispatch = useDispatch();
   const orderHistory = useSelector((state) => state.orders.userOrderHistory);
   // When login is setup just comment this back in
-  // const userId = useSelector((state) => state.auth.me.id);
-  const userId = 1;
+  const userId = useSelector((state) => state.auth.me.id);
+  // const userId = 1;
   useEffect(() => {
     dispatch(fetchUserOrderHistory(userId));
   }, [dispatch]);

@@ -13,7 +13,7 @@ function ProductCard({ product, handleDeleteProduct, isAdmin }) {
   const Navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  const isAdmin = useSelector((state) => state.auth.me.isAdmin);
+
   const getCurrentProductQuantity = (product) => {
     for (let i = 0; i < cart.cartProducts.length; i++) {
       if (product.name === cart.cartProducts[i].name)
