@@ -14,7 +14,7 @@ import CartProduct from "./CartProduct";
 function Cart() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.userCart);
-  const { userId } = useParams();
+  const userId = useSelector((state) => state.auth.me.id);
 
   const handleRemoveFromCart = (product) => {
     if (userId) {

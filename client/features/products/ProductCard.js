@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 function ProductCard({ product, handleDeleteProduct }) {
   const Navigate = useNavigate();
   const dispatch = useDispatch();
-  const userId = 1;
+  const userId = useSelector((state) => state.auth.me.id);
   const cart = useSelector((state) => state.cart);
   const userCart = useSelector((state) => state.userCart);
 

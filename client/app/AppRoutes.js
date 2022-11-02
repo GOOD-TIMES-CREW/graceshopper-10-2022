@@ -19,8 +19,6 @@ import Cart from "../features/cart/Cart";
 
 import AdminPage from "../features/admin/AdminPage";
 
-import AdminPage from "../features/admin/AdminPage";
-
 /**
  * COMPONENT
  */
