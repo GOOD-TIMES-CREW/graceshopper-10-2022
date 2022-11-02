@@ -15,12 +15,17 @@ import AllUsers from "../features/user/AllUsers";
 import ErrorPage from "../features/error/ErrorPage";
 import Login from "../features/login/Login";
 import AddProduct from "../features/products/AddProduct";
+import AllOrders from "../features/user/AllOrders";
 
 /**
  * COMPONENT
  */
 
 const AppRoutes = () => {
+  // Once authentication is fixed comment this line back in and delete hardcoded line
+  // const isAdmin = useSelector((state) => state.auth.me.isAdmin);
+  const isAdmin = false;
+
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const dispatch = useDispatch();
 
@@ -42,12 +47,19 @@ const AppRoutes = () => {
           <Route path="/order_history" element={<OrderHistory />} />
           <Route path="/products" element={<AllProducts />} />
           <Route path="/products/:id" element={<SingleProduct />} />
-          <Route path="/users" element={<AllUsers />} />
+
           <Route path="/users/:id" element={<AccountPage />} />
           <Route path="/success" element={<Success />} />
           <Route path="/canceled" element={<Canceled />} />
           <Route path="*" element={<ErrorPage />} />
-          <Route path="/products/add" element={<AddProduct />} />
+
+          {isAdmin && (
+            <>
+              <Route path="/users" element={<AllUsers />} />
+              <Route path="/allorders" element={<AllOrders />} />
+              <Route path="/products/add" element={<AddProduct />} />
+            </>
+          )}
         </Routes>
       )}
     </div>

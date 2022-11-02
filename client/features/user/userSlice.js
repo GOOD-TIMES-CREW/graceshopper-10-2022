@@ -4,7 +4,12 @@ import axios from "axios";
 const initialState = [];
 
 export const fetchUsers = createAsyncThunk("fetchUsers", async () => {
-  const { data } = await axios.get("/api/users");
+  const token = window.localStorage.getItem("token");
+  const { data } = await axios.get("/api/users", {
+    headers: {
+      authorization: token,
+    },
+  });
   return data;
 });
 
