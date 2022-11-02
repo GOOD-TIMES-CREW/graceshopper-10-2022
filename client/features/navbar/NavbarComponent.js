@@ -69,6 +69,28 @@ function NavbarComponent() {
                     ></CartProduct>
                   ))}
 
+
+                    <h1>Total: ${cart.cartTotalPrice}</h1>
+                    <Button variant="success">Purchase items!</Button>
+                  </>
+                ) : (
+                  <h1>There are no items in your cart!</h1>
+                )}
+              </Modal.Body>
+            </Modal>
+            <button type="button" onClick={logoutAndRedirectHome}>
+              Logout
+            </button>
+          </div>
+          {isAdmin && (
+            <>
+              {" "}
+           <Nav.Link href="/adminpage">Administration</Nav.Link>
+
+            </>
+          )}
+        </Nav>
+
                   <h1>Total: ${cart.cartTotalPrice}</h1>
                   <Button variant="success">Purchase items!</Button>
                 </>
@@ -78,6 +100,7 @@ function NavbarComponent() {
             </Modal.Body>
           </Modal>
         </>
+        
       ) : (
         <>
           <Navbar expand="sm" bg="dark" variant="dark" sticky="top">

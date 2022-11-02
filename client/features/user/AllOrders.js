@@ -16,7 +16,8 @@ function AllOrders() {
       {orders?.map((order) => (
         <div key={order.id} className="orders-container">
           <h3>
-            <Link to={`/orders/${order.id}`}>{order.confirmationNumber}</Link>
+            {/* <Link to={`/orders/${order.id}`}>{order.confirmationNumber}</Link> */}
+            {order.confirmationNumber}
           </h3>
           <p>Date Ordered: {order.dateOrdered}</p>
           <p>Status: {order.status}</p>
