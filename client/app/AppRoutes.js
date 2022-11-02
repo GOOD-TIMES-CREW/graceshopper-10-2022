@@ -15,14 +15,13 @@ import AllUsers from "../features/user/AllUsers";
 import ErrorPage from "../features/error/ErrorPage";
 import AddProduct from "../features/products/AddProduct";
 import AllOrders from "../features/user/AllOrders";
-
+import AdminPage from "../features/admin/AdminPage";
 
 /**
  * COMPONENT
  */
 
 const AppRoutes = () => {
-
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const isAdmin = useSelector((state) => state.auth.me.isAdmin);
 
@@ -49,6 +48,7 @@ const AppRoutes = () => {
               <Route path="/orders" element={<AllOrders />} />
               <Route path="/products/add" element={<AddProduct />} />
               <Route path="/users/:id" element={<AccountPage />} />
+              <Route path="/adminpage" element={<AdminPage />} />
               <Route path="*" element={<ErrorPage />} />
             </>
           )}
@@ -70,19 +70,10 @@ const AppRoutes = () => {
           />
           <Route path="/products" element={<AllProducts />} />
           <Route path="/products/:id" element={<SingleProduct />} />
-
           <Route path="/users/:id" element={<AccountPage />} />
           <Route path="/success" element={<Success />} />
           <Route path="/canceled" element={<Canceled />} />
           <Route path="*" element={<ErrorPage />} />
-
-          {isAdmin && (
-            <>
-              <Route path="/users" element={<AllUsers />} />
-              <Route path="/allorders" element={<AllOrders />} />
-              <Route path="/products/add" element={<AddProduct />} />
-            </>
-          )}
         </Routes>
       )}
     </div>

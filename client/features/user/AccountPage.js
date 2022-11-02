@@ -20,7 +20,7 @@ function AccountPage() {
         Hi, {firstName} {lastName}!
       </h1>
       <EditUser />
-      {/* <OrderHistory /> */}
+      <OrderHistory />
     </div>
   );
 }

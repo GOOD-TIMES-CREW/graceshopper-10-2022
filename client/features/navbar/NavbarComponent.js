@@ -74,8 +74,8 @@ function NavbarComponent() {
           {isAdmin && (
             <>
               {" "}
-              <Nav.Link href="/users">All Users</Nav.Link>{" "}
-              <Nav.Link href="/orders">All Orders</Nav.Link>{" "}
+           <Nav.Link href="/adminpage">Administration</Nav.Link>
+
             </>
           )}
         </Nav>
