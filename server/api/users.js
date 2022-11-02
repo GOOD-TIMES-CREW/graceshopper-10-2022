@@ -37,7 +37,11 @@ router.post("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
-    res.json(user);
+    if (user) {
+      res.json(user);
+    } else {
+      res.sendStatus(404);
+    }
   } catch (error) {
     next(error);
   }
@@ -47,8 +51,12 @@ router.get("/:id", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
-    await user.destroy();
-    res.send(user);
+    if (user) {
+      await user.destroy();
+      res.send(user);
+    } else {
+      res.sendStatus(404);
+    }
   } catch (error) {
     next(error);
   }
@@ -58,7 +66,11 @@ router.delete("/:id", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
-    res.json(await user.update(req.body));
+    if (user) {
+      res.json(await user.update(req.body));
+    } else {
+      res.sendStatus(404);
+    }
   } catch (err) {
     next(err);
   }
