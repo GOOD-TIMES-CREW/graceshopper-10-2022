@@ -15,7 +15,6 @@ function AllProducts() {
   const products = useSelector((state) => state.products.products);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
-
   const isAdmin = useSelector((state) => state.auth.me.isAdmin);
 
   useEffect(() => {

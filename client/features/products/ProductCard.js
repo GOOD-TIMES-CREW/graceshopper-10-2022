@@ -9,7 +9,7 @@ import {
 } from "../cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-function ProductCard({ product, handleDeleteProduct, isAdmin }) {
+function ProductCard({ product, handleDeleteProduct }) {
   const Navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
