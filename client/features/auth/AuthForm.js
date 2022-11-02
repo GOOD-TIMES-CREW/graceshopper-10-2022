@@ -10,6 +10,7 @@ import { authenticate } from "../../app/store";
 
 const AuthForm = ({ name, displayName }) => {
   const { error } = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
 
   const handleSubmit = (evt) => {

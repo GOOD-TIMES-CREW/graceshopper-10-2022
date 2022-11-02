@@ -1,74 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { authenticate } from "../../app/store";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import { authenticate } from "../../app/store";
 
-const validation = yup.object().shape({
-  username: yup.string().email().required("Email is required."),
-  password: yup.string().min(6).required("Password is required."),
-});
-
-function Login() {
+const Login = ({ name, displayName }) => {
   const dispatch = useDispatch();
-  const onSubmit = (values, actions) => {
-    actions.resetForm();
-    const formName = values.name;
-    const username = values.username;
-    const password = values.password;
-    dispatch(authenticate({ username, password, method: formName }));
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    const formName = evt.target.name;
+    const username = evt.target.username.value;
+    const password = evt.target.password.value;
+
+    dispatch(
+      authenticate({
+        username,
+        password,
+        method: formName,
+      })
+    );
+    const form = evt.currentTarget;
+    if (form.checkValidity() === false) {
+      evt.stopPropagation();
+    }
+    setValidated(true);
   };
 
-  const { values, errors, touched, handleSubmit, handleChange } = useFormik({
-    initialValues: {
-      username: "",
-      password: "",
-    },
-    validationSchema: validation,
-    onSubmit,
-  });
-
   return (
-    <div className="Login">
-      <Form onSubmit={handleSubmit} name={values.name}>
-        <Form.Group size="lg" controlId="email">
-          <Form.Label>Email</Form.Label>
-
+    <div>
+      <Form
+        noValidate
+        validated={validated}
+        onSubmit={handleSubmit}
+        name={name}
+      >
+        <Form.Group size="lg" controlId="username">
+          <Form.Label>Username</Form.Label>
           <Form.Control
             name="username"
-            type="email"
-            placeholder="Enter your email.."
-            value={values.username}
-            onChange={handleChange}
+            type="text"
+            placeholder="Enter your username..."
+            required
           />
-          {errors.email && touched.email && (
-            <p className="font-validation">{errors.email}</p>
-          )}
+          <Form.Control.Feedback type="invalid">
+            Please provide a username.
+          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group size="lg" controlId="password">
           <Form.Label>Password</Form.Label>
-
           <Form.Control
             name="password"
             type="password"
-            placeholder="Enter your password.."
-            value={values.password}
-            onChange={handleChange}
+            placeholder="Enter your password..."
+            required
           />
-          {errors.password && touched.password && (
-            <p className="font-validation">{errors.password}</p>
-          )}
+          <Form.Control.Feedback type="invalid">
+            Please provide a password.
+          </Form.Control.Feedback>
         </Form.Group>
 
-        <Button variant="primary" type="submit">
-          Login
-        </Button>
+        <Button type="submit">{displayName}</Button>
       </Form>
     </div>
   );
-}
+};
 
 export default Login;

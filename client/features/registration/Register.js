@@ -1,121 +1,109 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createUser } from "../user/userSlice";
-import Button from "react-bootstrap/Button";
+import { authenticate } from "../../app/store";
 import Form from "react-bootstrap/Form";
-import { useFormik } from "formik";
-import * as yup from "yup";
+import Button from "react-bootstrap/Button";
 
-const validation = yup.object().shape({
-  firstName: yup.string().required("First Name is required."),
-  lastName: yup.string().required("Last Name is required."),
-  email: yup.string().email().required("Email is required."),
-  password: yup.string().min(6).required("Password is required."),
-  termsCheckbox: yup
-    .boolean()
-    .oneOf([true], "Please accept the terms of service."),
-});
-
-function Register() {
+const Register = ({ name, displayName }) => {
   const dispatch = useDispatch();
-  const onSubmit = (values, actions) => {
-    actions.resetForm();
-    // console.log('values', values)
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    const formName = evt.target.name;
+    const firstName = evt.target.firstName.value;
+    const lastName = evt.target.lastName.value;
+    const username = evt.target.username.value;
+    const password = evt.target.password.value;
+
     dispatch(
-      createUser(
-        values.firstName,
-        values.lastName,
-        values.email,
-        values.password
-      )
+      authenticate({
+        firstName,
+        lastName,
+        username,
+        password,
+        method: formName,
+      })
     );
+    const form = evt.currentTarget;
+    if (form.checkValidity() === false) {
+      evt.stopPropagation();
+    }
+    setValidated(true);
   };
 
-  const { values, errors, touched, handleSubmit, handleChange } = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      termsCheckbox: false,
-    },
-    validationSchema: validation,
-    onSubmit,
-  });
-
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Label id="underline">
-        <h4>Create an Account</h4>
-      </Form.Label>
-      <br />
-      <Form.Label>First Name </Form.Label>
-      <Form.Control
-        name="firstName"
-        placeholder="Enter first name.."
-        value={values.firstName}
-        onChange={handleChange}
-      />
-      {errors.firstName && touched.firstName && (
-        <p className="font-validation">{errors.firstName}</p>
-      )}
-      <hr />
+    <div>
+      <Form
+        noValidate
+        validated={validated}
+        onSubmit={handleSubmit}
+        name={name}
+      >
+        <Form.Group size="lg" controlId="firstName">
+          <Form.Label>first Name</Form.Label>
+          <Form.Control
+            name="firstName"
+            type="text"
+            placeholder="Enter your first name..."
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide your first name.
+          </Form.Control.Feedback>
+        </Form.Group>
 
-      <p>Last Name </p>
-      <Form.Control
-        name="lastName"
-        placeholder="Enter last name.."
-        value={values.lastName}
-        onChange={handleChange}
-      />
-      {errors.lastName && touched.lastName && (
-        <p className="font-validation">{errors.lastName}</p>
-      )}
-      <hr />
+        <Form.Group size="lg" controlId="lastName">
+          <Form.Label>Last Name</Form.Label>
+          <Form.Control
+            name="lastName"
+            type="text"
+            placeholder="Enter your last name..."
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide your last name.
+          </Form.Control.Feedback>
+        </Form.Group>
 
-      <Form.Label>Email </Form.Label>
-      <Form.Control
-        name="email"
-        placeholder="Enter email.."
-        value={values.email}
-        onChange={handleChange}
-      />
-      {errors.email && touched.email && (
-        <p className="font-validation">{errors.email}</p>
-      )}
-      <hr />
+        <Form.Group size="lg" controlId="username">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            name="username"
+            type="text"
+            placeholder="Enter your username..."
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide a username.
+          </Form.Control.Feedback>
+        </Form.Group>
 
-      <p id="font-validation">Password </p>
-      <Form.Control
-        name="password"
-        type="password"
-        placeholder="Enter password.."
-        value={values.password}
-        onChange={handleChange}
-      />
-      {errors.password && touched.password && (
-        <p className="font-validation">{errors.password}</p>
-      )}
+        <Form.Group size="lg" controlId="password">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            name="password"
+            type="password"
+            placeholder="Enter your password..."
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide a password.
+          </Form.Control.Feedback>
+        </Form.Group>
 
-      <Form.Check
-        name="termsCheckbox"
-        type="checkbox"
-        value={values.termsCheckbox}
-        label="I agree to the terms of service."
-        checked={values.termsCheckbox}
-        onChange={handleChange}
-      />
-      {errors.termsCheckbox && touched.termsCheckbox && (
-        <p className="font-validation">{errors.termsCheckbox}</p>
-      )}
+        <Form.Group size="lg" controlId="password">
+          <Form.Check
+            required
+            label="I agree to terms and conditions"
+            feedbackType="invalid"
+          />
+        </Form.Group>
 
-      <hr />
-
-      <Button variant="primary" type="submit">
-        Continue
-      </Button>
-    </Form>
+        <Button type="submit">{displayName}</Button>
+      </Form>
+    </div>
   );
-}
+};
 
 export default Register;

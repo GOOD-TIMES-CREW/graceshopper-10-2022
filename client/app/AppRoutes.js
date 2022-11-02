@@ -58,18 +58,17 @@ const AppRoutes = () => {
         </Routes>
       ) : (
         <Routes>
-          //LOCALHOST:8080 DEFAULT PAGE TEMPORARY
           <Route
             path="/*"
-            element={<AuthForm name="login" displayName="Login" />}
+            element={<Login name="login" displayName="Login" />}
           />
           <Route
             path="/login"
-            element={<AuthForm name="login" displayName="Login" />}
+            element={<Login name="login" displayName="Login" />}
           />
           <Route
             path="/signup"
-            element={<AuthForm name="signup" displayName="Sign Up" />}
+            element={<Register name="signup" displayName="Sign Up" />}
           />
           <Route path="/products" element={<AllProducts />} />
           <Route path="/products/:id" element={<SingleProduct />} />
