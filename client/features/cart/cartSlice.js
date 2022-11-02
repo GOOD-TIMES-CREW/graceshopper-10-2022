@@ -30,7 +30,7 @@ const cartSlice = createSlice({
         (cartProduct) => cartProduct.id !== action.payload.id
       );
       state.cartProducts = remainingProducts;
-      localStorage.setItem("cartProdcts", JSON.stringify(state.cartProducts));
+      localStorage.setItem("cartProducts", JSON.stringify(state.cartProducts));
     },
     decrementQuantity(state, action) {
       const productIndex = state.cartProducts.findIndex(

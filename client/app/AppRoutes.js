@@ -15,9 +15,9 @@ import AllUsers from "../features/user/AllUsers";
 import ErrorPage from "../features/error/ErrorPage";
 import AddProduct from "../features/products/AddProduct";
 import AllOrders from "../features/user/AllOrders";
+import Cart from "../features/cart/Cart";
 
 import AdminPage from "../features/admin/AdminPage";
-
 
 /**
  * COMPONENT
@@ -42,6 +42,7 @@ const AppRoutes = () => {
           <Route path="/products" element={<AllProducts />} />
           <Route path="/products/:id" element={<SingleProduct />} />
           <Route path="/users/:id" element={<AccountPage />} />
+          <Route path="/users/:id/cart" element={<Cart />} />
           <Route path="*" element={<ErrorPage />} />
           {isAdmin && (
             <>
