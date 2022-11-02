@@ -22,9 +22,6 @@ import AllOrders from "../features/user/AllOrders";
  */
 
 const AppRoutes = () => {
-  // Once authentication is fixed comment this line back in and delete hardcoded line
-  // const isAdmin = useSelector((state) => state.auth.me.isAdmin);
-  const isAdmin = false;
 
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const isAdmin = useSelector((state) => state.auth.me.isAdmin);

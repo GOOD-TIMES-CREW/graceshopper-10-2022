@@ -9,10 +9,9 @@ import { getAmount } from "../cart/cartSlice";
 
 function NavbarComponent() {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+  const userId = useSelector((state) => state.auth.me.id);
 
-  // Once authentication is fixed comment this line back in and delete hardcoded line
-  // const isAdmin = useSelector((state) => state.auth.me.isAdmin);
-  const isAdmin = false;
+  const isAdmin = useSelector((state) => state.auth.me.isAdmin);
 
   useEffect(() => {
     dispatch(me());
@@ -44,7 +43,7 @@ function NavbarComponent() {
             <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/products">All Products</Nav.Link>
             <Nav.Link href="/order_history">Order History</Nav.Link>
-            <Nav.Link href="/users/:id">Account</Nav.Link>
+            <Nav.Link href={`/users/${userId}`}>Account</Nav.Link>
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
                 <Modal.Title>Shopping Cart</Modal.Title>
