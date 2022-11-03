@@ -56,34 +56,35 @@ function SingleProduct() {
                 In Cart: {getCurrentProductQuantity(product)}
               </Form.Label>
               <Col sm="6">
-                <Button
-                  sm="6"
+                <button
                   onClick={() => handleAdd(product)}
-                  className="mx-2"
+                  className="p-2 text-xs font-extrabold md:text-sm bg-gradient-to-b from-blue-200 to-blue-400 border border-blue-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 active:from-blue-500"
                 >
                   +
-                </Button>
-                <Button
+                </button>
+                <button
                   sm="6"
                   onClick={() => handleDecrement(product)}
-                  className="mx-2"
+                  className="p-2 text-xs font-extrabold md:text-sm bg-gradient-to-b from-blue-200 to-blue-400 border border-blue-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 active:from-blue-500"
                 >
                   -
-                </Button>
+                </button>
               </Col>
             </Form>
-            <Button
-              variant="danger"
+            <button
               onClick={() => handleRemoveFromCart(product)}
-              className="my-2"
+              className="p-2 text-xs font-extrabold md:text-sm bg-gradient-to-b from-blue-200 to-blue-400 border border-blue-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 active:from-blue-500"
             >
               Remove from cart
-            </Button>
+            </button>
           </>
         ) : (
-          <Button variant="primary" onClick={() => handleAdd(product)}>
+          <button
+            className="p-2 text-xs font-extrabold md:text-sm bg-gradient-to-b from-blue-200 to-blue-400 border border-blue-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 active:from-blue-500"
+            onClick={() => handleAdd(product)}
+          >
             Add To Cart
-          </Button>
+          </button>
         )}
       </Card.Body>
     </Card>

@@ -35,7 +35,9 @@ function AllProducts() {
 
         {isAdmin && (
           <Link to="/products/add">
-            <Button variant="primary">Add Product Form</Button>
+            <button className="button mt-8 p-2 text-xs font-extrabold md:text-sm bg-gradient-to-b from-blue-200 to-pink-400 border border-blue-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 active:from-blue-500 text-white">
+              Add Product Form
+            </button>
           </Link>
         )}
         {/* <Sidebar /> */}

@@ -11,11 +11,11 @@ function AllOrders() {
     dispatch(fetchAllOrders());
   }, [dispatch]);
   return (
-    <div className="all-orders">
+    <div className="flex flex-col items-center space-x-2 mb-5">
       <h1>All Orders</h1>
       {orders?.map((order) => (
         <div key={order.id} className="orders-container">
-          <h3>
+          <h3 className="font-extrabold">
             {/* <Link to={`/orders/${order.id}`}>{order.confirmationNumber}</Link> */}
             {order.confirmationNumber}
           </h3>
