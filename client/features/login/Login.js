@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+
 import { authenticate } from "../../app/store";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 const Login = ({ name, displayName }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = (evt) => {
@@ -26,6 +29,7 @@ const Login = ({ name, displayName }) => {
       evt.stopPropagation();
     }
     setValidated(true);
+    navigate("/");
   };
 
   return (
@@ -64,6 +68,9 @@ const Login = ({ name, displayName }) => {
 
         <Button type="submit">{displayName}</Button>
       </Form>
+
+      <h3>Don't have an account?</h3>
+      <button onClick={() => navigate("/signup")}>Sign Up</button>
     </div>
   );
 };

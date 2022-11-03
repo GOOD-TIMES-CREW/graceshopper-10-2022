@@ -16,7 +16,6 @@ import ErrorPage from "../features/error/ErrorPage";
 import AddProduct from "../features/products/AddProduct";
 import AllOrders from "../features/user/AllOrders";
 import Cart from "../features/cart/Cart";
-
 import AdminPage from "../features/admin/AdminPage";
 
 /**
@@ -42,26 +41,26 @@ const AppRoutes = () => {
           <Route path="/products" element={<AllProducts />} />
           <Route path="/products/:id" element={<SingleProduct />} />
           <Route path="/users/:id" element={<AccountPage />} />
+
           <Route path="/users/:id/cart" element={<Cart />} />
           <Route path="*" element={<ErrorPage />} />
           {isAdmin && (
             <>
-              <Route to="/home" element={<Home />} />
+              <Route to="/" element={<Home />} />
               <Route path="/users" element={<AllUsers />} />
               <Route path="/orders" element={<AllOrders />} />
               <Route path="/products/add" element={<AddProduct />} />
               <Route path="/users/:id" element={<AccountPage />} />
               <Route path="/adminpage" element={<AdminPage />} />
-              <Route path="*" element={<ErrorPage />} />
+              {/* <Route path="*" element={<ErrorPage />} /> */}
             </>
           )}
         </Routes>
       ) : (
         <Routes>
-          <Route
-            path="/*"
-            element={<Login name="login" displayName="Login" />}
-          />
+          //LOCALHOST:8080 DEFAULT PAGE TEMPORARY
+          <Route path="/*" element={<Home />} />
+
           <Route
             path="/login"
             element={<Login name="login" displayName="Login" />}
@@ -75,6 +74,7 @@ const AppRoutes = () => {
           <Route path="/users/:id" element={<AccountPage />} />
           <Route path="/success" element={<Success />} />
           <Route path="/canceled" element={<Canceled />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       )}

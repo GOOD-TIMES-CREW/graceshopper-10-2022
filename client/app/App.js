@@ -8,8 +8,8 @@ import "../../public/stylesheets/style.css";
 const App = () => {
   return (
     <div>
-      {/* <Navbar /> */}
-      <NavbarComponent />
+      <Navbar />
+      {/* <NavbarComponent /> */}
       <AppRoutes />
       <Footer />
     </div>
