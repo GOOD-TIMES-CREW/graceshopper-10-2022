@@ -34,7 +34,7 @@ function AccountPage() {
       <button type="button" onClick={logoutAndRedirectHome}>
         Logout
       </button>
-      <EditUser />
+      {/* <EditUser /> */}
       <OrderHistory />
     </div>
   );

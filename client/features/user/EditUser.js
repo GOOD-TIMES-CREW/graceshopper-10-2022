@@ -23,13 +23,13 @@ function EditUser() {
       </label>
       <p>First Name: {user.firstName}</p>
       <input
-        name="firstName"
+        name="First Name"
         value={firstName}
         onChange={(e) => setFirstName(e.target.value)}
       />
       <p>Last Name: {user.lastName}</p>
       <input
-        name="lastName"
+        name="Last Name"
         value={lastName}
         onChange={(e) => setLastName(e.target.value)}
       />

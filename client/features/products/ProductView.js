@@ -64,21 +64,23 @@ function ProductView({ id, name, price, description, genre, imageUrl }) {
             </div>
           ))}
       </div>
-      <p className="mb-5">${price}</p>
+      <div className="p-2">
+        <p className="mb-5">${price}</p>
+      </div>
 
       {hasPrime && (
         <div className="flex items-center space-x-2 -mt-5">
           <p className="text-xs text-gray-500">FREE Delivery</p>
         </div>
       )}
-
+      {/* 
       <button onClick={addItemToCart} className="mt-auto button">
         <img
           loading="lazy"
           src="https://i.ibb.co/m0Xkjdd/addtocart.png"
           alt=""
         ></img>
-      </button>
+      </button> */}
     </div>
   );
 }
