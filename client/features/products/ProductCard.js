@@ -7,7 +7,7 @@ import {
   getAmount,
   removeFromCart,
 } from "../cart/cartSlice";
-import { addToUserCart, removeFromUserCart } from "../cart/userCartSlice";
+import { addToUserCart } from "../cart/userCartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const MAX_RATING = 5;
@@ -26,78 +26,39 @@ function ProductCard({ product, handleDeleteProduct }) {
   const [hasPrime, setHasPrime] = useState(Math.random() < 0.5 ? true : false);
   const userCart = useSelector((state) => state.userCart);
 
-
-  const getCurrentProductQuantity = (product) => {
-    for (let i = 0; i < cart.cartProducts.length; i++) {
-      if (product.name === cart.cartProducts[i].name)
-        return cart.cartProducts[i].cartQuantity;
-    }
-    return 0;
-  };
-  const getCurrentCartProduct = (product) => {
-    if (userId) {
-      for (let i = 0; i < userCart.cartProducts.length; i++) {
-        if (product.name === userCart.cartProducts[i].name)
-          return userCart.cartProducts[i];
-      }
-    } else {
-      for (let i = 0; i < cart.cartProducts.length; i++) {
-        if (product.name === cart.cartProducts[i].name)
-          return cart.cartProducts[i];
-      }
-    }
-    return 0;
-  };
+  // const getCurrentProductQuantity = (product) => {
+  //   for (let i = 0; i < cart.cartProducts.length; i++) {
+  //     if (product.name === cart.cartProducts[i].name)
+  //       return cart.cartProducts[i].cartQuantity;
+  //   }
+  //   return 0;
+  // };
+  // const getCurrentCartProduct = (product) => {
+  //   if (userId) {
+  //     for (let i = 0; i < userCart.cartProducts.length; i++) {
+  //       if (product.name === userCart.cartProducts[i].name)
+  //         return userCart.cartProducts[i];
+  //     }
+  //   } else {
+  //     for (let i = 0; i < cart.cartProducts.length; i++) {
+  //       if (product.name === cart.cartProducts[i].name)
+  //         return cart.cartProducts[i];
+  //     }
+  //   }
+  //   return 0;
+  // };
 
   const handleRemoveFromCart = (cartProduct) => {
-    if (userId) {
-      dispatch(removeFromCart(product));
-      dispatch(
-        removeFromUserCart({
-          productId: product.id,
-          userId,
-          quantityRemoved: cartProduct.cartQuantity,
-          totalQuantity: cartProduct.cartQuantity,
-        })
-      );
-    } else {
-      dispatch(removeFromCart(cartProduct));
-    }
+    dispatch(removeFromCart(cartProduct));
   };
+
   const handleDecrement = (cartProduct) => {
-    if (userId) {
-      dispatch(decrementQuantity(product));
-      dispatch(
-        removeFromUserCart({
-          productId: product.id,
-          userId,
-          quantityRemoved: cartProduct.cartQuantity - 1,
-          totalQuantity: cartProduct.cartQuantity,
-        })
-      );
-    } else {
-      dispatch(decrementQuantity(cartProduct));
-    }
+    dispatch(decrementQuantity(cartProduct));
   };
-  const handleAdd = (cartProduct, product) => {
-    console.log(cartProduct.cartQuantity);
+
+  const handleAddToCart = (cartProduct, userId) => {
     if (userId) {
-      dispatch(addToCart(product));
-      cartProduct.cartQuantity
-        ? dispatch(
-            addToUserCart({
-              productId: product.id,
-              userId,
-              totalQuantity: cartProduct.cartQuantity,
-            })
-          )
-        : dispatch(
-            addToUserCart({
-              productId: product.id,
-              userId,
-              totalQuantity: 0,
-            })
-          );
+      dispatch(addToUserCart({ cartProduct, userId }));
     } else {
       dispatch(addToCart(product));
     }
@@ -144,7 +105,7 @@ function ProductCard({ product, handleDeleteProduct }) {
           <p className="text-xs text-gray-500">FREE Delivery</p>
         </div>
       )}
-      {getCurrentProductQuantity(product) > 0 ? (
+      {/* {getCurrentProductQuantity(product) > 0 ? (
         <>
           <Form as={Row}>
             <Form.Label column="true" sm="6">
@@ -187,21 +148,30 @@ function ProductCard({ product, handleDeleteProduct }) {
               src="https://i.ibb.co/m0Xkjdd/addtocart.png"
               alt=""
             ></img>
+          </Button> */}
+      <Button
+        className="mt-auto button"
+        variant="primary"
+        onClick={() => handleAddToCart(product)}
+      >
+        <img
+          loading="lazy"
+          src="https://i.ibb.co/m0Xkjdd/addtocart.png"
+          alt=""
+        ></img>
+      </Button>
+      {isAdmin && (
+        <>
+          <div className="vr" />
+          <Button
+            variant="danger"
+            onClick={() => handleDeleteProduct(product.id)}
+          >
+            Delete Product
           </Button>
-
-          {isAdmin && (
-            <>
-              <div className="vr" />
-              <Button
-                variant="danger"
-                onClick={() => handleDeleteProduct(product.id)}
-              >
-                Delete Product
-              </Button>
-            </>
-          )}
-        </Stack>
+        </>
       )}
+      {/* </Stack> */}
     </div>
   );
 }
