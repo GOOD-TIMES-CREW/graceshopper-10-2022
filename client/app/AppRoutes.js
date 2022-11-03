@@ -17,6 +17,7 @@ import AddProduct from "../features/products/AddProduct";
 import AllOrders from "../features/user/AllOrders";
 import Cart from "../features/cart/Cart";
 import AdminPage from "../features/admin/AdminPage";
+import UserCart from "../features/cart/UserCart";
 
 /**
  * COMPONENT
@@ -47,6 +48,8 @@ const AppRoutes = () => {
           {isAdmin && (
             <>
               <Route to="/" element={<Home />} />
+              <Route path="/carts" element={<Cart />} />
+              <Route path="/user-cart" element={<UserCart />} />
               <Route path="/users" element={<AllUsers />} />
               <Route path="/orders" element={<AllOrders />} />
               <Route path="/products/add" element={<AddProduct />} />
@@ -60,7 +63,7 @@ const AppRoutes = () => {
         <Routes>
           //LOCALHOST:8080 DEFAULT PAGE TEMPORARY
           <Route path="/*" element={<Home />} />
-
+          <Route path="/carts" element={<Cart />} />
           <Route
             path="/login"
             element={<Login name="login" displayName="Login" />}
@@ -74,7 +77,7 @@ const AppRoutes = () => {
           <Route path="/users/:id" element={<AccountPage />} />
           <Route path="/success" element={<Success />} />
           <Route path="/canceled" element={<Canceled />} />
-          <Route path="/checkout" element={<Checkout />} />
+          {/* <Route path="/checkout" element={<Checkout />} /> */}
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       )}

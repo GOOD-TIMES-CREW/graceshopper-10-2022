@@ -3,100 +3,98 @@ const Order = require("../db/models/Order");
 const Product = require("../db/models/Product");
 const User = require("../db/models/User");
 const Order_Product = require("../db/models/Order_Product");
+const CartProducts = require("../db/models/CartProducts");
+const Cart = require("../db/models/Cart");
 
-// GET /api/users/:id/cart
-router.get("/:id/cart", async (req, res, next) => {
+// GET /api/carts
+router.get("/", async (req, res, next) => {
   try {
-    // console.log(req.params.id);
-    const [order] = await Order.findOrCreate({
-      where: {
-        userId: req.params.id,
-      },
-      defaults: {
-        userId: req.params.id,
-      },
-    });
-    const orderProducts = await Order_Product.findAll({
-      where: {
-        orderId: order.id,
-      },
-    });
-    res.json(orderProducts);
+    const allCartProducts = await CartProducts.findAll();
+    res.json(allCartProducts);
   } catch (err) {
     next(err);
   }
 });
 
-// POST /users/:id/cart
-router.post("/:id/cart", async (req, res, next) => {
+// GET /api/carts/users/:id
+router.get("/users/:id", async (req, res, next) => {
   try {
-    const [order] = await Order.create({
+    const products = await CartProducts.findAll({
       where: {
         userId: req.params.id,
       },
     });
-
-    res.status(201).json(order);
+    res.json(products);
   } catch (err) {
     next(err);
   }
 });
 
-// PUT /users/:id/cart
-router.put("/:id/cart", async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
-    const [order] = await Order.findOrCreate({
+    const cart = await Cart.findOrCreate({
+      where: { userId: req.params.id },
+    });
+
+    res.status(200).json(cart);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// POST /carts/:id
+router.post("/:id", async (req, res, next) => {
+  const { id, price, name, imageUrl } = req.body.cartProduct;
+  try {
+    const cart = await Cart.findOne({
       where: {
-        userId: req.params.id,
+        userId: req.body.userId,
       },
     });
-    const orderProduct = await Order_Product.findOrCreate({
-      where: {
-        orderId: order.id,
-        productId: req.body.data.productId,
-      },
-      defaults: {
-        orderId: order.id,
-        productId: req.body.data.productId,
+    if (cart) {
+      const cartProducts = await CartProducts.create({
+        userId: req.body.userId,
+        productId: id,
         quantity: 1,
-      },
-    });
-    console.log(req.body.data.totalQuantity, orderProduct);
-    if (orderProduct.quantity >= 1) {
-      orderProduct.update({
-        quantity: req.body.data.totalQuantity++,
+        productName: name,
+        productPrice: price,
+        imageUrl: imageUrl,
       });
+      res.json(cartProducts);
     }
-    res.json(orderProduct);
   } catch (err) {
     next(err);
   }
 });
 
-// DELETE /users/:id/cart
-router.delete("/:id/cart", async (req, res, next) => {
+// PUT /carts/:id
+router.put("/:id", async (req, res, next) => {
+  const { id } = req.body.product;
   try {
-    const order = await Order.findOne({
+    const cartProducts = await CartProducts.findOne({
       where: {
-        userId: req.params.id,
+        userId: req.body.userId,
       },
     });
-    const orderProduct = await Order_Product.findOne({
+    await cartProducts.update({
       where: {
-        orderId: order.id,
-        productId: req.body.productId,
+        userId: req.body.userId,
+
+        productId: id,
       },
     });
-    if (req.body.quantityRemoved < req.body.totalQuantity) {
-      orderProduct.update({
-        quantity: req.body.totalQuantity - req.body.quantityRemoved,
-      });
-    } else {
-      await orderProduct.destroy();
-    }
-    res.send(orderProduct);
   } catch (err) {
     next(err);
+  }
+});
+
+// DELETE /carts/:id
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const item = await CartProducts.findByPk(req.params.id);
+    await item.destroy();
+  } catch (error) {
+    next(error);
   }
 });
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import CartProduct from "../cart/CartProduct";
+import CartProducts from "../cart/CartProducts";
 import { me } from "../auth/authSlice";
 import { getAmount } from "../cart/cartSlice";
 
@@ -95,7 +95,7 @@ function Nav() {
               <p className="font-extrabold md:text-sm">& Orders</p>
             </div>
             <div
-              onClick={() => navigate("/checkout")}
+              onClick={() => navigate("/carts")}
               className="relative cursor-pointer hover:underline flex items-center"
             >
               <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-pink-300 text-center rounded-full text-black font-bold">
