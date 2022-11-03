@@ -42,8 +42,8 @@ const AppRoutes = () => {
           <Route path="/products" element={<AllProducts />} />
           <Route path="/products/:id" element={<SingleProduct />} />
           <Route path="/users/:id" element={<AccountPage />} />
-
           <Route path="/users/:id/cart" element={<Cart />} />
+          <Route path="/carts" element={<Cart />} />
           <Route path="*" element={<ErrorPage />} />
           {isAdmin && (
             <>
