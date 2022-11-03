@@ -1,29 +1,48 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import CartProduct from "../cart/CartProduct";
+import { me } from "../auth/authSlice";
+import { getAmount } from "../cart/cartSlice";
 
 function Nav() {
-  const nav = useNavigate();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+  const { firstName, lastName, isAdmin } = useSelector(
+    (state) => state.auth.me
+  );
+
+  useEffect(() => {
+    dispatch(me());
+  }, []);
+
+  const [show, setShow] = useState(false);
+  const cart = useSelector((state) => state.cart);
+  const productsCount = cart.cartTotalQuantity;
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    dispatch(getAmount());
+  }, []);
+
+  const loginRedirect = () => {
+    dispatch(logout());
+    navigate("/");
+  };
+
   return (
     <div>
       {/* Top Nav */}
       <div className="bg-[url('https://i.ibb.co/xCXsyMG/Untitled-Artwork-5.png')] w-full bg-cover bg-repeat">
         <div className="flex items-center p-1 flex-grow py-2">
           <div className="mt-2 flex items-center flex-grow sm:flex-grow-0 cursor-pointer">
-            {/* <Image
-            src="https://i.ibb.co/P47rJZW/goodtimesnobg.png"
-            width={200}
-            height={20}
-            object-fit="contain"
-            className="cursor-pointer"
-            alt=""
-          /> */}
-            <Link to="">
+            <Link to="/">
               <img
                 src="https://i.ibb.co/P47rJZW/goodtimesnobg.png"
                 alt=""
                 className="w-40"
-                // style={{ height: "12px", padding: 4 }}
               />
             </Link>
           </div>
@@ -54,22 +73,33 @@ function Nav() {
           {/* Right */}
           <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
             <div
-              onClick={() => nav("/login")}
+              onClick={() =>
+                isLoggedIn ? navigate("/users/:id") : navigate("/login")
+              }
               className="cursor-pointer hover:underline"
             >
-              <p>Sign In</p>
+              {isLoggedIn ? (
+                <p>
+                  Hi, {firstName} {lastName}!
+                </p>
+              ) : (
+                <p>Sign In</p>
+              )}
               <p className="font-extrabold md:text-sm">Account & Lists</p>
             </div>
             <div
-              onClick={() => nav("/order_history")}
+              onClick={() => navigate("/order_history")}
               className="cursor-pointer hover:underline"
             >
               <p>Returns</p>
               <p className="font-extrabold md:text-sm">& Orders</p>
             </div>
-            <div className="relative cursor-pointer hover:underline flex items-center">
+            <div
+              onClick={() => navigate("/checkout")}
+              className="relative cursor-pointer hover:underline flex items-center"
+            >
               <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-pink-300 text-center rounded-full text-black font-bold">
-                4
+                {productsCount}
               </span>
               {/* <ShoppingCartIcon className="h-10" /> */}
               <svg

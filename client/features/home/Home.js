@@ -2,6 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Banner from "../banner/Banner";
 import FeaturedProducts from "../products/FeaturedProducts";
+import AllOrders from "../user/AllOrders";
+import AllUsers from "../user/AllUsers";
 
 /**
  * COMPONENT
@@ -22,12 +24,11 @@ const Home = () => {
             You are an Administrator, with great power comes great
             responsibility! 😉
           </h4>
+          <AllOrders />
+          <AllUsers />
         </div>
       ) : (
         <div>
-          <h3>
-            Welcome, {firstName} {lastName}
-          </h3>
           <Banner />
           <FeaturedProducts />
         </div>
