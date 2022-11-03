@@ -121,7 +121,7 @@ function Footer() {
         </section>
         <div className="text-center p-4 copyright-section">
           © 2022 Copyright: All Rights Reserved.
-          <ScrollButton />
+          {/* <ScrollButton /> */}
         </div>
       </MDBFooter>
     </div>

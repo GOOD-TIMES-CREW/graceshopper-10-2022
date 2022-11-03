@@ -45,6 +45,7 @@ const AppRoutes = () => {
           <Route path="/users/:id/cart" element={<Cart />} />
           <Route path="/carts" element={<Cart />} />
           <Route path="*" element={<ErrorPage />} />
+          <Route path="/success" element={<Success />} />
           {isAdmin && (
             <>
               <Route to="/" element={<Home />} />

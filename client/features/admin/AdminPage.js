@@ -7,8 +7,8 @@ function AdminPage() {
   const { firstName, lastName } = useSelector((state) => state.auth.me);
 
   return (
-    <div className="single-user">
-      <h1>
+    <div className="bg-gradient-to-b from-blue-300 to-blue-600">
+      <h1 className="font-extrabold">
         Hi, {firstName} {lastName}!
       </h1>
       <>

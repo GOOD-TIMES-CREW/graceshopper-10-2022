@@ -66,11 +66,24 @@ const Login = ({ name, displayName }) => {
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Button type="submit">{displayName}</Button>
+        {/* <Button type="submit"></Button> */}
+        <button
+          type="submit"
+          className="button mt-8 p-2 text-xs font-extrabold md:text-sm bg-gradient-to-b from-blue-200 to-pink-400 border border-blue-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 active:from-blue-500 text-white"
+        >
+          {displayName}
+        </button>
       </Form>
 
-      <h3>Don't have an account?</h3>
-      <button onClick={() => navigate("/signup")}>Sign Up</button>
+      <div className="pt-10 items-center">
+        <h3 className="mt-10 text-red-700">Don't have an account?</h3>
+        <button
+          onClick={() => navigate("/signup")}
+          className="button mt-8 p-2 text-xs font-extrabold md:text-sm bg-gradient-to-b from-blue-200 to-pink-400 border border-blue-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 active:from-blue-500 text-white"
+        >
+          Sign Up
+        </button>
+      </div>
     </div>
   );
 };

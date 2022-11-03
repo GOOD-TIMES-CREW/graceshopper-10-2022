@@ -11,11 +11,11 @@ function AllUsers() {
     dispatch(fetchUsers());
   }, [dispatch]);
   return (
-    <div className="all-users">
+    <div className="flex flex-col items-center space-x-2 mb-5">
       <h1>All Users</h1>
       {users?.map(({ id, firstName, lastName, username }) => (
         <div key={id} className="user-container">
-          <h3>
+          <h3 className="font-extrabold">
             <Link to={`/users/${id}`}>
               {firstName} {lastName}
             </Link>
